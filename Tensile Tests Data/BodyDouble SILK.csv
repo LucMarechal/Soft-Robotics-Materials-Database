@@ -2,10 +2,17 @@ Thickness (mm);3;mm;;
 Width (mm);6;mm;;
 Length (mm);33;mm;;
 Cross-section (cm^2);0.18;cm^2;;
+Standard;ASTM D412;;;
+Type of test;Pull-to-failure;;;
 Speed (mm/min);450;mm/min;;
-Machine;Instron;;;
-Lab;SYMME - Savoie Mont Blanc University;;;
-Tested Material;BodyDouble SILK;;;
+Machine;Instron  5569;;;
+Load Cell;1 kN - Instron  2525-806;;;
+Grippers;Instron 2710-010 ;;;
+Strain Measurement;Global;;;
+Strain calculation;Derived from the machine crosshead displacement readings;;;
+Lab;Univ. Savoie Mont Blanc - SYMME Lab, 7400 Annecy, France;;;
+Material supplier;Smooth-On;;;
+Material;BodyDouble SILK;;;
 Time (s);True Strain;True Stress (MPa);Engineering Strain;Engineering Stress (MPa)
 0.2;0.043645;0.01077050032;0.044615;0.01031
 0.3;0.065745;0.019197329185;0.067955;0.017975
