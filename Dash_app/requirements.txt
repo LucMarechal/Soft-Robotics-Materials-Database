@@ -21,6 +21,7 @@ future==0.18.2
 gitdb==4.0.2
 github-api-v3==2019.5.1
 GitPython==3.1.0
+gunicorn==20.0.4
 idna==2.9
 isort==4.3.21
 itsdangerous==1.1.0
@@ -66,4 +67,3 @@ typed-ast==1.4.0
 urllib3==1.25.8
 Werkzeug==1.0.1
 wrapt==1.11.2
-gunicorn==19.6.0
