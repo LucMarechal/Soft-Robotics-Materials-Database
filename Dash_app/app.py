@@ -44,7 +44,6 @@ soroblack = '#4D4D4D'
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
-
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.title = "Soft Robotics Materials Database"
