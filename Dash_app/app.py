@@ -44,6 +44,8 @@ soroblack = '#4D4D4D'
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
+server = app.server
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
@@ -363,6 +365,9 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+#    app.run_server(debug=True)
+    app.run_server(debug=False,
+                   host="0.0.0.0",
+                   port=port)
 
 
