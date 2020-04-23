@@ -3,10 +3,10 @@ __author__ = "Luc Marechal"
 __copyright__ = ""
 __credits__ = ["Luc Marechal", "Lukas Lindenroth"]
 __license__ = "GPL"
-__version__ = "1.0.1"
+__version__ = "1.0.0"
 __maintainer__ = "Luc Marechal"
 __email__ = "luc.marechal(at)univ-smb.fr"
-__status__ = "Debugg"
+__status__ = "Prod0"
 
 # Resources and documentation
 # Beautifulsoup : https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3
@@ -44,9 +44,10 @@ soroblack = '#4D4D4D'
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
-server = app.server
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+app.title = "Soft Robotics Materials Database"
 
 
 def list_files(url):
@@ -129,11 +130,8 @@ html.A("Constitutive Models", className = "item2"),
 html.A("Materials Comparison", className = "item3"),
 html.A("Setup & Characterisation", className = "item4"),
 html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database',className = "item1"),
+    ]),
 
-	]),
-
-
-app.title = "Soft Robotics Materials Database"
 
 app.layout = html.Div(children=[
 
@@ -365,6 +363,4 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
 
 
 if __name__ == '__main__':
-    app.run_server()
-
-
+    app.run_server(debug=False)
