@@ -41,7 +41,7 @@ import re
 sorored = '#CD3959' #'rgba(205,57,89,1)'
 soroblack = '#4D4D4D'
 
-
+# CSS
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
