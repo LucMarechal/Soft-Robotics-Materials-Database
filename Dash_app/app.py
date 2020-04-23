@@ -365,9 +365,6 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
 
 
 if __name__ == '__main__':
-#    app.run_server(debug=True)
-    app.run_server(debug=False,
-                   host="0.0.0.0",
-                   port=port)
+    app.run_server()
 
 
