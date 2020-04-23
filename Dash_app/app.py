@@ -44,7 +44,7 @@ soroblack = '#4D4D4D'
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets, static_folder='/assets/')
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
 def list_files(url):
@@ -138,7 +138,7 @@ app.layout = html.Div(children=[
     dbc.Row([
         	
         dbc.Col(html.Img(
-            	src='https://raw.githubusercontent.com/LucMarechal/data/master/logosoro.png',#'https://user-images.githubusercontent.com/36209435/72664756-f5b6d600-3a01-11ea-88b2-a3f3e46fe9f6.png',
+            	src=app.get_asset_url('logo_SoRo.svg'),#src='https://raw.githubusercontent.com/LucMarechal/data/master/logosoro.png',#'https://user-images.githubusercontent.com/36209435/72664756-f5b6d600-3a01-11ea-88b2-a3f3e46fe9f6.png',
             	style={'width': '80%'}
                 ), width=3),
 
