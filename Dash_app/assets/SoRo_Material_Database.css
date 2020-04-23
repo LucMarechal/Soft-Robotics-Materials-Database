@@ -1,0 +1,134 @@
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Dash Range Slider
+
+Note: https://community.plotly.com/t/slide-box-color-of-plotly-rangeslider/34849.
+*/
+
+
+/* Dash Range Slider
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.rc-slider-handle{
+    border: solid 2px #100;
+}
+.rc-slider-handle:active {
+    border-color: #4D4D4D;
+    box-shadow: 0 0 1px #100;
+}
+.rc-slider-handle:hover {
+    border-color: #100;
+}
+.rc-slider-handle:focus {
+    border-color: #4D4D4D;
+    box-shadow: 0 0 0 1px #100;
+}
+.rc-slider-track {
+    background-color: #100;
+}
+.rc-slider-dot-active {
+    border-color: #100;
+}
+
+
+
+/* SVG on mouse over
+–––––––––––––––––––––––––––––––––––––––––––––––––– 
+Note: https://css-tricks.com/change-color-of-svg-on-hover/
+*/
+.navicon-bike {
+  mask: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/icon-bike-black.svg);
+}
+.navicon-bell {
+  mask: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/icon-bell-black.svg);
+}
+.navicon-arrow {
+  mask: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/icon-arrow-black.svg);
+}
+.navicon-github {
+  mask: url(icon_GitHub.svg);
+}
+.navicon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: #4D4D4D;
+  mask-size: cover;
+}
+.navicon:hover,
+.navicon:focus {
+  background: #CD3959;
+}
+
+body {
+  display: grid;
+  height: 80vh;
+  margin: 10;
+  place-items: center center;
+
+}
+
+
+
+/* simple nav bar
+–––––––––––––––––––––––––––––––––––––––––––––––––– 
+Note: https://codepen.io/rm/pen/ldhon
+*/
+* {
+  box-sizing: border-box;
+}
+
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+ul li {
+  display: inline;
+  text-align: center;
+}
+
+
+ /*a {
+  display: inline-block;
+  width: 25%;
+  padding: .75rem 0;
+  margin: 0;
+  text-decoration: none;
+  color: #CD3959;
+}
+*/
+nav a {
+  color: #4D4D4D;
+  display: inline-block;
+  text-align: right;
+  text-decoration: none;
+  padding:.1rem 2.5rem;
+  font-size: 17px;
+  border-bottom: 3px solid transparent;
+  margin:1rem;
+}
+
+nav a:hover {
+  color:#CD3959;
+  border-bottom: 3px solid red;
+  transition: .3s ease-in-out;
+}
+
+.footer{
+  text-align: right;
+  margin:10px;
+  padding-right: 20px;
+}
+
+.footer img{
+  width:100px;
+  height:100px;
+
+}
+
+  .footer a{
+  display: inline-block;
+  text-decoration: none;
+    padding-right: 30px;
+}
