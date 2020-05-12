@@ -1,3 +1,4 @@
+-e .
 asgiref==3.2.7
 astroid==2.3.0
 beautifulsoup4==4.8.1
