@@ -8,5 +8,8 @@ setup(
    author='Luc Marechal',
    author_email='',
    packages=['Soft Robotics Materials Database'],  #same as name
-   #install_requires=['bar', 'greek'], #external packages as dependencies
+   install_requires=[
+      'dash',
+      'dash-html-components',
+      'dash-bootstrap-components'], #external packages as dependencies
 )
