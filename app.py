@@ -47,7 +47,6 @@ line_colors = ['#b72367','#ef5454','#f9875a','#1dbc8e','#3e8ccc','#5fd0db','#8bc
 unicode_epsilon = "\U0000025B"
 unicode_sigma = "\U000003C3"
 
-
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
 
@@ -559,7 +558,7 @@ def update_graph_comparison(data_type_toggle):
               [Input('url', 'pathname')])
 def display_page(pathname):
     print(pathname) # For DEBUG only
-    if pathname == '/constitutive_models':
+    if pathname == '/' or pathname == '/constitutive_models':
         return app_constitutive_models_layout
     elif pathname == '/materials_comparison':
         return app_materials_comparison_layout
