@@ -169,15 +169,15 @@ app.layout = html.Div([
                 style={'width': '80%'}
                 ), width=3),
 
-        dbc.Col(nav, align="center", width=6),
+        dbc.Col(nav, align="center", width=7),
 
         dbc.Col(
-        html.Div(className = "footer", children=[
-        html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='40%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
-        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='40%'),href='https://www.univ-smb.fr/en/', className = "logos"),
-        ]), align="center", width=3),
+        #html.Div(className = "footer", children=[
+        [html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='42%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
+        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='42%'),href='https://www.univ-smb.fr/en/', className = "logos",style={'padding': '15px'}),
+        ], align="center", width=2),
 
-    ], justify="between",),   
+    ], justify="between"),   
 
 ### DISPLAYED PAGE ###
     html.Div(id='page-content')
@@ -221,7 +221,7 @@ app_constitutive_models_layout = html.Div(children=[
             data=[],
             style_cell={'textAlign': 'left', 'textOverflow': 'ellipsis'},
             style_table={
-            'maxWidth': '450px',
+            'maxWidth': '500px',
             'overflowX': 'scroll',
             'border': 'thin lightgrey solid',
             'padding': '15px'
