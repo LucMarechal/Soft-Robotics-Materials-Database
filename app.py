@@ -70,7 +70,6 @@ def list_files(url):
     materials = []
     for filename in csvfiles:
         materials.append(filename.extract().get_text()[:-4])  # -4 to remove the file extension .csv
-
     return materials
 
 
@@ -150,16 +149,12 @@ models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Ho
 
 
 nav = html.Nav(className = "nav nav-pills", children=[
-dcc.Link("Constitutive Models", href='/constitutive_models'),
-dcc.Link("Materials Comparison", href='/materials_comparison'),
-html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation",className = "item1"),
-#html.A("Constitutive Models", className = "item2"),
-#html.A("Materials Comparison", className = "item3"),
-#html.A("Setup & Characterisation", className = "item4"),
-html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki',className = "item1"),
-html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database',className = "item1"),
+    dcc.Link("Constitutive Models", href='/constitutive_models'),
+    dcc.Link("Materials Comparison", href='/materials_comparison'),
+    html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation",className = "item1"),
+    html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki',className = "item1"),
+    html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database',className = "item1"),
     ]),
-
 
 #############################################################################
 #  MAIN PAGE
@@ -174,7 +169,14 @@ app.layout = html.Div([
                 style={'width': '80%'}
                 ), width=3),
 
-        dbc.Col(nav, align="center", width=9),
+        dbc.Col(nav, align="center", width=6),
+
+        dbc.Col(
+        html.Div(className = "footer", children=[
+        html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='40%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
+        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='40%'),href='https://www.univ-smb.fr/en/', className = "logos"),
+        ]), align="center", width=3),
+
     ], justify="between",),   
 
 ### DISPLAYED PAGE ###
@@ -203,14 +205,6 @@ app_constitutive_models_layout = html.Div(children=[
             style={'width': '100%', 'marginBottom': '1em'}
         ),
         
-        daq.BooleanSwitch(
-            id='toggle-data-type',
-            on=False,
-            label='True / Engineering',
-            labelPosition='bottom',
-            color=sorored, 
-        ),
-
         # dcc.RadioItems(
     	   #  id='radio-item-data-type',
     	   #  options=[
@@ -255,8 +249,20 @@ app_constitutive_models_layout = html.Div(children=[
 
         #html.Div(children=[
         html.Label('Principal Cauchy Stress', style={'marginBottom': '0.5em'}),
-        html.Img(id='constitutive-model-formula', src=app.get_asset_url('Ogden.svg'), width='100%', style={'marginBottom': '1em'}),
+        html.Img(id='constitutive-model-formula', src=app.get_asset_url('Ogden.svg'), width='100%', style={'marginBottom': '2em'}),
         #], style={'marginBottom': '1em'}),
+
+        dbc.Row([
+            daq.BooleanSwitch(
+                id='toggle-data-type',
+                on=False,
+                #label='True / Engineering',
+                #labelPosition='bottom',
+                color=sorored,
+                style={'padding': '10px'} 
+            ),
+            html.Label('True / Engineering'),
+        ]),
 
         html.Button('Fit Data', id='button-fit-data', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
 
@@ -286,11 +292,11 @@ app_constitutive_models_layout = html.Div(children=[
         ),
 
         html.Div(id='output-container-range-slider'),
-        html.Div(className = "footer", children=[
-        html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='15%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
-        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='15%'),href='https://www.univ-smb.fr/en/', className = "logos"),
-]),
-    ], width=7),
+        #html.Div(className = "footer", children=[
+        #html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='15%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
+        #html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='15%'),href='https://www.univ-smb.fr/en/', className = "logos"),
+        #]),
+        ], width=7),
 
     ]),
 
@@ -315,7 +321,7 @@ dbc.Row([
     dbc.Col([
 
         dbc.Row([
-        html.Div('\U000024F2', style={'padding': '30px', 'color': sorored, 'font-size': '90px'}),
+        html.Div('\U000024F2', style={'padding': '30px', 'color': sorored, 'font-size': '90px', 'marginBottom': '-1em', 'textAlign':'center'}),
         html.Div(children='materials currently in the database', style={'padding': '30px'}),
         ]),
    
@@ -325,15 +331,7 @@ dbc.Row([
         #     label='Show All / Selection only',
         #     labelPosition='right',
         #     color=sorored, 
-        # ),
-
-        daq.BooleanSwitch(
-            id='toggle-true-eng-data',
-            on=False,
-            label='True / Engineering',
-            labelPosition='right',
-            color=sorored, 
-        ),
+        # ),    
 
         dash_table.DataTable(
             id='table-materials-list',
@@ -352,6 +350,18 @@ dbc.Row([
     ], width=2),
 
     dbc.Col([
+        
+        dbc.Row([
+            daq.BooleanSwitch(
+                id='toggle-true-eng-data',
+                on=False,
+                #label='True / Engineering',
+                #labelPosition='bottom',
+                color=sorored,
+                style={'padding': '10px'} 
+            ),
+            html.Label('True / Engineering'),
+        ]),
         
         dcc.Graph(id='materials-comparison-graph'),           
     ], width=10),
