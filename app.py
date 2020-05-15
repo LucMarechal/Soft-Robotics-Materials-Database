@@ -21,6 +21,7 @@ import dash_html_components as html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output, State
 import dash_table
+import dash_daq as daq  # for Toggle switch button
 # Bootstrap
 import dash_bootstrap_components as dbc
 ###########import simplejson as json
@@ -41,12 +42,16 @@ import re
 # Custom colors
 sorored = '#CD3959' #'rgba(205,57,89,1)'
 soroblack = '#4D4D4D'
+line_colors = ['#b72367','#ef5454','#f9875a','#1dbc8e','#3e8ccc','#5fd0db','#8bce00','#f7cb00','#b72367','#7ce214','#ef5454','#f9875a','#1dbc8e','#3e8ccc','#5fd0db','#8bce00','#f7cb00','#b72367','#00ACAA']
+# Special characters
+unicode_epsilon = "\U0000025B"
+unicode_sigma = "\U000003C3"
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
 
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets,)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
 server = app.server
 app.title = "Soft Robotics Materials Database"
 
@@ -82,6 +87,21 @@ def generate_data_table(dataframe, max_rows=10):
         ])
     ])
 
+
+def read_csv_exp_data_files(material_name):
+    file = github_raw_url + material_name.replace(" ", "%20") + '.csv' # Replace space by %20 for html url 
+    header = pd.read_csv(file, delimiter = ';', usecols = ["PARAMETER", "INFO"]).head(15).to_dict('records')
+    data = pd.read_csv(file, delimiter = ';',skiprows=18, names = ['Time (s)','True Strain','True Stress (MPa)','Engineering Strain','Engineering Stress (MPa)']) # the column headers are on line 16 from the top of the file   
+    return data, header
+
+
+# CI DESSOUS A VIRER
+# def plot_exp_data(materials):
+#     for i in materials:
+#         print(i)
+#         [data,header] = read_csv_exp_data_files(i)
+#         print(data)
+#     return data
 
 
 #############################################################################
@@ -129,32 +149,47 @@ materials = list_files(github_url)
 models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Hookean', 'Humphrey'])
 
 
-
-
 nav = html.Nav(className = "nav nav-pills", children=[
-html.A("Constitutive Models", className = "item2"),
-html.A("Materials Comparison", className = "item3"),
-html.A("Setup & Characterisation", className = "item4"),
+dcc.Link("Constitutive Models", href='/constitutive_models'),
+dcc.Link("Materials Comparison", href='/materials_comparison'),
+html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation",className = "item1"),
+#html.A("Constitutive Models", className = "item2"),
+#html.A("Materials Comparison", className = "item3"),
+#html.A("Setup & Characterisation", className = "item4"),
+html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki',className = "item1"),
 html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database',className = "item1"),
     ]),
 
 
-app.layout = html.Div(children=[
+#############################################################################
+#  MAIN PAGE
+#############################################################################
+app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
 
-    dbc.Row([
-        	
+### NAV BAR ###
+    dbc.Row([            
         dbc.Col(html.Img(
-            	src=app.get_asset_url('logo_SoRo.svg'),#src='https://raw.githubusercontent.com/LucMarechal/data/master/logosoro.png',#'https://user-images.githubusercontent.com/36209435/72664756-f5b6d600-3a01-11ea-88b2-a3f3e46fe9f6.png',
-            	style={'width': '80%'}
+                src=app.get_asset_url('logo_SoRo.svg'),#src='https://raw.githubusercontent.com/LucMarechal/data/master/logosoro.png',#'https://user-images.githubusercontent.com/36209435/72664756-f5b6d600-3a01-11ea-88b2-a3f3e46fe9f6.png',
+                style={'width': '80%'}
                 ), width=3),
 
         dbc.Col(nav, align="center", width=9),
     ], justify="between",),   
 
+### DISPLAYED PAGE ###
+    html.Div(id='page-content')
+])
+
+
+
+#############################################################################
+#  PAGE CONSTITUTIVE MODELS
+#############################################################################
+app_constitutive_models_layout = html.Div(children=[
 
     html.H1(children='Constitutive Models',style={'padding': '15px'}),
 
- 
     dbc.Row([
 
     dbc.Col([
@@ -168,15 +203,23 @@ app.layout = html.Div(children=[
             style={'width': '100%', 'marginBottom': '1em'}
         ),
         
-        dcc.RadioItems(
-    	    id='radio-item-data-type',
-    	    options=[
-        	    {'label': 'True', 'value': 'True'},
-        	    {'label': 'Engineering', 'value': 'Engineering'},
-    	    ],
-    	    value='True',
-            style={'marginBottom': '1em'}
+        daq.BooleanSwitch(
+            id='toggle-data-type',
+            on=False,
+            label='True / Engineering',
+            labelPosition='bottom',
+            color=sorored, 
         ),
+
+        # dcc.RadioItems(
+    	   #  id='radio-item-data-type',
+    	   #  options=[
+        # 	    {'label': 'True', 'value': 'True'},
+        # 	    {'label': 'Engineering', 'value': 'Engineering'},
+    	   #  ],
+    	   #  value='True',
+        #     style={'marginBottom': '1em'}
+        # ),
 
         dash_table.DataTable(
             id='table-material-info',
@@ -195,8 +238,7 @@ app.layout = html.Div(children=[
 
     dbc.Col([
         # Dropdown to select the constitutive model     
-        html.Label('Constitutive model'),
-        
+        html.Label('Constitutive model'),      
         dcc.Dropdown(
             id='dropdown-constitutive-model',
             options=[{'label': i, 'value': i} for i in models],   # dynamically fill in the dropdown menu
@@ -204,28 +246,17 @@ app.layout = html.Div(children=[
             style={'width': '100%', 'marginBottom': '1em'}
         ),
 
+        # NOT WORKinG : To display the constitutive model mathematical equation 
         # dcc.Textarea(
         #     id='textarea-constitutive-model',
         #     value=r"$y(x)=\frac{1}{{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}}$",
         #     style={'width': '100%', 'height': 50, 'marginBottom': '1em'},
         # ),
 
-
-
-
-#html.Div(children=[
-html.Label('Principal Cauchy Stress', style={'marginBottom': '0.5em'}),
-html.Img(id='constitutive-model-formula', src=app.get_asset_url('Ogden.svg'), width='100%', style={'marginBottom': '1em'}),
-#], style={'marginBottom': '1em'}),
-
-
-
-
-
-
-
-
-
+        #html.Div(children=[
+        html.Label('Principal Cauchy Stress', style={'marginBottom': '0.5em'}),
+        html.Img(id='constitutive-model-formula', src=app.get_asset_url('Ogden.svg'), width='100%', style={'marginBottom': '1em'}),
+        #], style={'marginBottom': '1em'}),
 
         html.Button('Fit Data', id='button-fit-data', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
 
@@ -255,26 +286,87 @@ html.Img(id='constitutive-model-formula', src=app.get_asset_url('Ogden.svg'), wi
         ),
 
         html.Div(id='output-container-range-slider'),
-html.Div(className = "footer", children=[
-html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='15%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
-html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='15%'),href='https://www.univ-smb.fr/en/', className = "logos"),
+        html.Div(className = "footer", children=[
+        html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='15%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
+        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='15%'),href='https://www.univ-smb.fr/en/', className = "logos"),
 ]),
     ], width=7),
 
+    ]),
 
+#############################################################################
+#  Hidden div inside the app that stores the intermediate value
+#############################################################################
+    html.Div(id='intermediate-exp-data', style={'display': 'none'}),  
+    html.Div(id='intermediate-model-data', style={'display': 'none'}),
+    html.Div(id='intermediate-selected-exp-data', style={'display': 'none'}),
+]),
+
+
+#############################################################################
+#  PAGE MATERIALS COMPARISON
+#############################################################################
+app_materials_comparison_layout = html.Div(children=[
+
+html.H1(children='Materials Comparison',style={'padding': '15px'}),
+
+dbc.Row([
+
+    dbc.Col([
+
+        dbc.Row([
+        html.Div('\U000024F2', style={'padding': '30px', 'color': sorored, 'font-size': '90px'}),
+        html.Div(children='materials currently in the database', style={'padding': '30px'}),
+        ]),
+   
+        # daq.BooleanSwitch(
+        #     id='toggle-switch-all-selection',
+        #     on=False,
+        #     label='Show All / Selection only',
+        #     labelPosition='right',
+        #     color=sorored, 
+        # ),
+
+        daq.BooleanSwitch(
+            id='toggle-true-eng-data',
+            on=False,
+            label='True / Engineering',
+            labelPosition='right',
+            color=sorored, 
+        ),
+
+        dash_table.DataTable(
+            id='table-materials-list',
+            columns=[{"name": 'MATERIALS', "id": "materials"}],
+            data=[
+                dict(materials=mat, **{p: 0 for p in materials})
+                for mat in materials
+            ],
+            style_cell={'textAlign': 'left', 'textOverflow': 'ellipsis'},
+            style_table={
+            'maxWidth': '300px',
+            'overflowY': 'scroll',
+            'padding': '30px'
+            },
+            ),           
+    ], width=2),
+
+    dbc.Col([
+        
+        dcc.Graph(id='materials-comparison-graph'),           
+    ], width=10),
+
+
+]),
 
     ]),
 
 
-    # Hidden div inside the app that stores the intermediate value
-    html.Div(id='intermediate-exp-data', style={'display': 'none'}),  
-    html.Div(id='intermediate-model-data', style={'display': 'none'}),
-    html.Div(id='intermediate-selected-exp-data', style={'display': 'none'}),
-])
 
 
-
-
+#############################################################################
+#  CALLBACKS
+#############################################################################
 @app.callback(
         Output('constitutive-model-formula', 'src'),
         [Input('dropdown-constitutive-model', 'value')])
@@ -292,10 +384,10 @@ def update_constitutve_model_formula(constitutive_model):
         [Input('button-fit-data', 'n_clicks'),
         Input('dropdown-material', 'value'),
         Input('dropdown-constitutive-model', 'value'),
-        Input('radio-item-data-type', 'value')],
+        Input('toggle-data-type', 'on')],
         [State('intermediate-selected-exp-data', 'children'),
         State('range-slider', 'value')])
-def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type, jsonified_selected_exp_data,slider_value):
+def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_toggle, jsonified_selected_exp_data,slider_value):
     model_data = pd.DataFrame({'True Strain' : [], 'True Stress (MPa)' : []})  # Model is computed only for True Strain True Stress Data for now
     table_param_column = []
     table_param_data = []
@@ -304,6 +396,11 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type, 
     
     ctx = dash.callback_context
     triggered_id = ctx.triggered[0]['prop_id'].split('.')[0] # Determining which Input has fired
+
+    if data_type_toggle is True:
+        data_type = 'Engineering'
+    else:
+        data_type = 'True'
 
     if triggered_id == "button-fit-data" and data_type == 'True':
         if n_clicks is not None:
@@ -333,11 +430,13 @@ def update_output(slider_value):
     Output('range-slider', 'max'),
     Output('range-slider', 'value')],
     [Input('dropdown-material', 'value'),
-    Input('radio-item-data-type', 'value')])
-def update_data(material,data_type):
-    file = github_raw_url+material.replace(" ", "%20")+'.csv' # Replace space by %20 for html url 
-    header = pd.read_csv(file, delimiter = ';', usecols = ["PARAMETER", "INFO"]).head(15).to_dict('records')
-    data = pd.read_csv(file, delimiter = ';',skiprows=18, names = ['Time (s)','True Strain','True Stress (MPa)','Engineering Strain','Engineering Stress (MPa)']) # the column headers are on line 16 from the top of the file     
+    Input('toggle-data-type', 'on')])
+def update_data(material,data_type_toggle):
+    if data_type_toggle is True:
+        data_type = 'Engineering'
+    else:
+        data_type = 'True'
+    [data, header] = read_csv_exp_data_files(material)
     range_slider_max = data[data_type+' Strain'].iloc[-1]
     range_slider_value = [0,range_slider_max]
     return data.to_json(), header, range_slider_max, range_slider_value # or, more generally, json.dumps(cleaned_df)
@@ -351,15 +450,21 @@ def update_data(material,data_type):
     Input('dropdown-constitutive-model', 'value'),
     Input('intermediate-model-data', 'children')],
     [State('intermediate-exp-data', 'children'),
-    State('radio-item-data-type', 'value')]
+    State('toggle-data-type', 'on')]
     )
-def update_figure(material,slider_range,constitutive_model,jsonified_model_data,jsonified_exp_data,data_type):
+def update_figure(material,slider_range,constitutive_model,jsonified_model_data,jsonified_exp_data,data_type_toggle):
     exp_data = pd.read_json(jsonified_exp_data)
     idx_low= pd.Index(exp_data['True Strain']).get_loc(slider_range[0],method='nearest')   # Find the index of the nearest strain value selected with the slider
     idx_high = pd.Index(exp_data['True Strain']).get_loc(slider_range[1],method='nearest') # Find the index of the nearest strain value selected with the slider
     selected_exp_data = exp_data[idx_low:idx_high] # Trimm the data to the selected range
 
+    if data_type_toggle is True:
+        data_type = 'Engineering'
+    else:
+        data_type = 'True'
+
     model_data = pd.read_json(jsonified_model_data)
+    
     if data_type == 'True':
     	selected_model_data = model_data[idx_low:idx_high] # Trimm the data to the selected range
     else:
@@ -382,8 +487,8 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
     figure={
         'data': [trace_exp_data,trace_model_data],
         'layout': dict(
-            xaxis={'title': data_type + ' Strain ' + u"\u025B"},            # U025B unicode for greek letter epsilon
-            yaxis={'title': data_type + ' Stress ' + u"\u03C3" + ' (MPa)'}, # U03C3 unicode for greek letter sigma
+            xaxis={'title': data_type + ' Strain ' + unicode_epsilon},
+            yaxis={'title': data_type + ' Stress ' + unicode_sigma + ' (MPa)'},
             margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
             hovermode='closest',
             legend={'x': 0.05, 'y': 1},                
@@ -391,6 +496,68 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
         )
     }
     return figure, selected_exp_data.to_json()
+
+
+
+
+@app.callback(
+    Output('materials-comparison-graph', 'figure'),
+    #[Input('toggle-switch-all-selection', 'on'),
+     [Input('toggle-true-eng-data', 'on')]#]
+    )
+def update_graph_comparison(data_type_toggle):
+    if data_type_toggle is True:
+        data_type = 'Engineering'
+    else:
+        data_type = 'True'
+    
+    materials = list_files(github_url)
+    
+    traces_data = []
+    for i, material in enumerate(materials):#material in materials:
+        [exp_data,header] = read_csv_exp_data_files(material)
+
+        trace_exp_data = dict(x = exp_data[data_type+' Strain'].values,
+                    y = exp_data[data_type+' Stress (MPa)'].values,
+                    mode='lines',
+                    opacity=1,
+                    marker=dict(size=8, color=line_colors[i]),
+                    name=material)
+        traces_data.append(trace_exp_data)
+
+    figure={
+        'data': traces_data,#[trace_exp_data,trace_exp_data],
+        'layout': dict(
+            xaxis={'title': data_type + ' Strain ' + unicode_epsilon},
+            yaxis={'title': data_type + ' Stress ' + unicode_sigma + ' (MPa)'},
+            autosize=True,
+            #width=1000,#500,
+            #height=500,
+            margin={'l': 5, 'b': 40, 't': 5, 'r': 20},
+            #hovermode='closest',
+            legend={'x': -.5, 'y': 0},     
+            showlegend=True,
+        )
+    }
+    return figure
+
+
+
+
+
+@app.callback(Output('page-content', 'children'),
+              [Input('url', 'pathname')])
+def display_page(pathname):
+    print(pathname) # For DEBUG only
+    if pathname == '/constitutive_models':
+        return app_constitutive_models_layout
+    elif pathname == '/materials_comparison':
+        return app_materials_comparison_layout
+    elif pathname == '/setup_characterisation':
+        return app_setup_characterisation_layout
+    else:
+        return '404'
+
 
 
 if __name__ == '__main__':
