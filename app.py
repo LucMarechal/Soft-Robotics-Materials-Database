@@ -315,13 +315,11 @@ app_materials_comparison_layout = html.Div(children=[
 
 html.H1(children='Materials Comparison',style={'padding': '15px'}),
 
-dbc.Row([
-
-    dbc.Col([
+#dbc.Row([
 
         dbc.Row([
-        html.Div('\U000024F2', style={'padding': '30px', 'color': sorored, 'font-size': '90px', 'marginBottom': '-1em', 'textAlign':'center'}),
-        html.Div(children='materials currently in the database', style={'padding': '30px'}),
+        html.Div('\U000024F2', style={'padding': '15x', 'color': sorored, 'font-size': '90px'}), #, 'marginBottom': '0.1em'
+        html.Div(children='materials currently in the database'),
         ]),
    
         # daq.BooleanSwitch(
@@ -332,24 +330,23 @@ dbc.Row([
         #     color=sorored, 
         # ),    
 
-        dash_table.DataTable(
-            id='table-materials-list',
-            columns=[{"name": 'MATERIALS', "id": "materials"}],
-            data=[
-                dict(materials=mat, **{p: 0 for p in materials})
-                for mat in materials
-            ],
-            style_cell={'textAlign': 'left', 'textOverflow': 'ellipsis'},
-            style_table={
-            'maxWidth': '300px',
-            'overflowY': 'scroll',
-            'padding': '30px'
-            },
-            ),           
-    ], width=2),
+## USELESS
+        # dash_table.DataTable(
+        #     id='table-materials-list',
+        #     columns=[{"name": 'MATERIALS', "id": "materials"}],
+        #     data=[
+        #         dict(materials=mat, **{p: 0 for p in materials})
+        #         for mat in materials
+        #     ],
+        #     style_cell={'textAlign': 'left', 'textOverflow': 'ellipsis'},
+        #     style_table={
+        #     'maxWidth': '300px',
+        #     'overflowY': 'scroll',
+        #     'padding': '30px'
+        #     },
+        #     ),           
 
-    dbc.Col([
-        
+      
         dbc.Row([
             daq.BooleanSwitch(
                 id='toggle-true-eng-data',
@@ -357,18 +354,16 @@ dbc.Row([
                 #label='True / Engineering',
                 #labelPosition='bottom',
                 color=sorored,
-                style={'padding': '10px'} 
+                style={'padding': '20px'} 
             ),
             html.Label('True / Engineering'),
-        ]),
-        
-        dcc.Graph(id='materials-comparison-graph'),           
-    ], width=10),
+        ], style={'marginBottom': '-0.1em'}), 
 
+        dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube'),   
+
+#    ]),
 
 ]),
-
-    ]),
 
 
 
@@ -539,12 +534,13 @@ def update_graph_comparison(data_type_toggle):
         'layout': dict(
             xaxis={'title': data_type + ' Strain ' + unicode_epsilon},
             yaxis={'title': data_type + ' Stress ' + unicode_sigma + ' (MPa)'},
-            autosize=True,
+            autosize=False,
             #width=1000,#500,
-            #height=500,
-            margin={'l': 5, 'b': 40, 't': 5, 'r': 20},
-            #hovermode='closest',
-            legend={'x': -.5, 'y': 0},     
+            height=600,
+            #margin={'l': 40, 'b': 40, 't': 5, 'r': 20},
+            margin={'t': -1,},
+            hovermode='closest',
+            legend={'x':-.2, 'y': 0},     
             showlegend=True,
         )
     }
