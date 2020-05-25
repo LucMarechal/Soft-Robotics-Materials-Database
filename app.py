@@ -47,7 +47,7 @@ line_colors = ['#b72367','#ef5454','#f9875a','#1dbc8e','#3e8ccc','#5fd0db','#8bc
 unicode_epsilon = "\U0000025B"
 unicode_sigma = "\U000003C3"
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',dbc.themes.GRID]
+external_stylesheets = ['SoRo_Material_Database.css', dbc.themes.GRID,] #dbc.themes.BOOTSTRAP, 'https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
@@ -143,6 +143,7 @@ github_url = 'https://github.com/LucMarechal/Soft-Robotics-Materials-Database/tr
 github_raw_url = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/'
 # Content of the GitHub repository. Lists all *.csv file name in the database
 materials = list_files(github_url)
+nb_materials_in_db = len(materials)
 # Constitutive models
 models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Hookean', 'Humphrey'])
 
@@ -150,9 +151,9 @@ models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Ho
 nav = html.Nav(className = "nav nav-pills", children=[
     dcc.Link("Constitutive Models", href='/constitutive_models'),
     dcc.Link("Materials Comparison", href='/materials_comparison'),
-    html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation",className = "item1"),
-    html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki',className = "item1"),
-    html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database',className = "item1"),
+    html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation"),
+    html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki'),
+    html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database'),
     ]),
 
 #############################################################################
@@ -172,8 +173,8 @@ app.layout = html.Div([
 
         dbc.Col(
         #html.Div(className = "footer", children=[
-        [html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='42%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
-        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='42%'),href='https://www.univ-smb.fr/en/', className = "logos",style={'padding': '15px'}),
+        [html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='42%'),href='https://www.univ-smb.fr/symme/en/'),
+        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='42%'),href='https://www.univ-smb.fr/en/',style={'padding': '15px'}),
         ], align="center", width=2),
 
     ], justify="between"),   
@@ -318,9 +319,14 @@ html.H1(children='Materials Comparison',style={'padding': '15px'}),
 #dbc.Row([
 
         dbc.Row([
-        html.Div('\U000024F2', style={'padding': '15x', 'color': sorored, 'font-size': '90px'}), #, 'marginBottom': '0.1em'
-        html.Div(children='materials currently in the database'),
-        ]),
+        html.Div(nb_materials_in_db, className="w3-badge w3-xxlarge w3-sorored w3-padding"),
+        html.Div("Materials in the Database"),
+        ],style={'padding': '15px'}),
+        #dbc.Badge("18",color="light", className="ml-1",style={'padding': '15px'}),
+        #dbc.Row([
+        #html.Div('\U000024F2', style={'padding': '15x', 'color': sorored, 'font-size': '90px'}), #, 'marginBottom': '0.1em'
+        #html.Div(children='materials currently in the database'),
+        #]),
    
         # daq.BooleanSwitch(
         #     id='toggle-switch-all-selection',
@@ -415,7 +421,7 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_t
 
     	    table_param_data = df_model_param.to_dict('records')
     	    table_param_column = [{"name": i, "id": i} for i in df_model_param.columns]
-    	    header_table_param = constitutive_model + " parameters : " + '\n' + '(on ε true range {})'.format(slider_value)
+    	    header_table_param = constitutive_model + " parameters : " + '\n' + '(on ε ' + data_type + ' range {})'.format([f"{num:.2f}" for num in slider_value])#slider_value)
     	    aic_model = "AIC : " + np.array2string(aic.round(1))
 
     return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model
@@ -425,7 +431,7 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_t
     Output('output-container-range-slider', 'children'),
     [Input('range-slider', 'value')])
 def update_output(slider_value):
-    return 'Selected strain ε: {}'.format(slider_value)
+    return 'Selected strain ε: {}'.format([f"{num:.2f}" for num in slider_value])
 
 
 @app.callback(
@@ -538,7 +544,7 @@ def update_graph_comparison(data_type_toggle):
             #width=1000,#500,
             height=600,
             #margin={'l': 40, 'b': 40, 't': 5, 'r': 20},
-            margin={'t': -1,},
+            margin={'t': -3,},
             hovermode='closest',
             legend={'x':-.2, 'y': 0},     
             showlegend=True,
