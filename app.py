@@ -293,7 +293,7 @@ app_constitutive_models_layout = html.Div(children=[
 
         html.Div(id='output-container-range-slider', style={'margin-bottom': '15px'}),
 
-        html.Div("The data are fitted on the selected strain range. Adjust the range accordingly to your application to obtain a better accuracy of the model."),
+        html.Div("The data is fitted on the selected strain range. Adjust the range accordingly to your application to obtain a better accuracy of the model."),
         
         ], width=7),
 
