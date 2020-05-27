@@ -291,11 +291,10 @@ app_constitutive_models_layout = html.Div(children=[
             allowCross=False
         ),
 
-        html.Div(id='output-container-range-slider'),
-        #html.Div(className = "footer", children=[
-        #html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='15%'),href='https://www.univ-smb.fr/symme/en/', className = "logos"),
-        #html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='15%'),href='https://www.univ-smb.fr/en/', className = "logos"),
-        #]),
+        html.Div(id='output-container-range-slider', style={'margin-bottom': '15px'}),
+
+        html.Div("The data are fitted on the selected strain range. Adjust the range accordingly to your application to obtain a better accuracy of the model."),
+        
         ], width=7),
 
     ]),
@@ -322,7 +321,7 @@ html.H1(children='Materials Comparison',style={'padding': '15px'}),
                 html.Img(src=app.get_asset_url('logo_soroDB.svg'), style={'width': '30%', 'display': 'inline-block'}), 
                 html.Div(nb_materials_in_db, className="w3-badge w3-xlarge w3-sorored w3-padding", style={'display': 'inline-block'}),
                 html.Div("materials in the Database", style={'margin-bottom': '100px'}),
-                html.Div("To show or hide curves, click on the materials name in the legend", style={'margin-bottom': '50px'}),
+                html.Div("To show or hide curves, click on the materials name in the legend.", style={'margin-bottom': '50px'}),
                 
                 dbc.Row([
                     daq.BooleanSwitch(
@@ -585,4 +584,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
