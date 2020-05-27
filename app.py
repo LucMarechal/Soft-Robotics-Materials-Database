@@ -317,11 +317,28 @@ app_materials_comparison_layout = html.Div(children=[
 html.H1(children='Materials Comparison',style={'padding': '15px'}),
 
 #dbc.Row([
-
         dbc.Row([
-        html.Div(nb_materials_in_db, className="w3-badge w3-xxlarge w3-sorored w3-padding"),
-        html.Div("Materials in the Database"),
-        ],style={'padding': '15px'}),
+            dbc.Col([
+                html.Img(src=app.get_asset_url('logo_soroDB.svg'), style={'width': '30%', 'display': 'inline-block'}), 
+                html.Div(nb_materials_in_db, className="w3-badge w3-xlarge w3-sorored w3-padding", style={'display': 'inline-block'}),
+                html.Div("materials in the Database", style={'margin-bottom': '100px'}),
+                html.Div("To show or hide curves, click on the materials name in the legend", style={'margin-bottom': '50px'}),
+                
+                dbc.Row([
+                    daq.BooleanSwitch(
+                        id='toggle-true-eng-data',
+                        on=False,
+                        #label='True / Engineering',
+                        #labelPosition='bottom',
+                        color=sorored,
+                        style={'padding': '20px'} 
+                    ),
+                    html.Label('True / Engineering'),
+                ]),
+                
+                ], width=2),
+            dbc.Col(dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube'), width={"size": 10}),
+        ],no_gutters=True,style={'padding': '20px', 'marginBottom': '-1.5em'}),
         #dbc.Badge("18",color="light", className="ml-1",style={'padding': '15px'}),
         #dbc.Row([
         #html.Div('\U000024F2', style={'padding': '15x', 'color': sorored, 'font-size': '90px'}), #, 'marginBottom': '0.1em'
@@ -351,23 +368,19 @@ html.H1(children='Materials Comparison',style={'padding': '15px'}),
         #     'padding': '30px'
         #     },
         #     ),           
-
       
-        dbc.Row([
-            daq.BooleanSwitch(
-                id='toggle-true-eng-data',
-                on=False,
-                #label='True / Engineering',
-                #labelPosition='bottom',
-                color=sorored,
-                style={'padding': '20px'} 
-            ),
-            html.Label('True / Engineering'),
-        ], style={'marginBottom': '-0.1em'}), 
+ #       dbc.Row([
+#            dbc.Col(daq.BooleanSwitch(
+#                id='toggle-true-eng-data',
+#                on=False,
+#                label='True / Engineering',
+#                labelPosition='bottom',
+#                color=sorored,
+#                style={'padding': '20px'} 
+#            )),
+#            dbc.Col(html.Label('True / Engineering')),
+#        ], style={'marginBottom': '-0.9em'}), 
 
-        dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube'),   
-
-#    ]),
 
 ]),
 
@@ -542,7 +555,7 @@ def update_graph_comparison(data_type_toggle):
             yaxis={'title': data_type + ' Stress ' + unicode_sigma + ' (MPa)'},
             autosize=False,
             #width=1000,#500,
-            height=600,
+            height=550,
             #margin={'l': 40, 'b': 40, 't': 5, 'r': 20},
             margin={'t': -3,},
             hovermode='closest',
@@ -572,4 +585,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
