@@ -336,7 +336,8 @@ html.H1(children='Materials Comparison',style={'padding': '15px'}),
                 ]),
                 
                 ], width=2),
-            dbc.Col(dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube'), width={"size": 10}),
+            dbc.Col([html.Div(id='text-loading-data',children=["Loading data..."], style={"color": sorored,"font-weight": 'bold', "text-align": 'center'}), 
+                    dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube')], width={"size": 10}),
         ],no_gutters=True,style={'padding': '20px', 'marginBottom': '-1.5em'}),
         #dbc.Badge("18",color="light", className="ml-1",style={'padding': '15px'}),
         #dbc.Row([
@@ -523,9 +524,9 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
 
 
 @app.callback(
-    Output('materials-comparison-graph', 'figure'),
-    #[Input('toggle-switch-all-selection', 'on'),
-     [Input('toggle-true-eng-data', 'on')]#]
+    [Output('materials-comparison-graph', 'figure'),
+    Output('text-loading-data', 'children')],
+    [Input('toggle-true-eng-data', 'on')],
     )
 def update_graph_comparison(data_type_toggle):
     if data_type_toggle is True:
@@ -562,16 +563,27 @@ def update_graph_comparison(data_type_toggle):
             showlegend=True,
         )
     }
-    return figure
+
+    loading_text = " "
+    return figure, loading_text
 
 
-
-
+# @app.callback(
+#     Output('text-loading-data', 'children'),
+#     [Input('loading-graph', 'is_loading')]
+#     )
+# def display_loading_text(is_loading):
+#     print('ok')
+#     if is_loading is True:
+#         loading_text = ""
+#     else:
+#         loading_text = "Loading data..."
+#     return loading_text
 
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    print(pathname) # For DEBUG only
+    print(pathname) # For DEBUG only §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
     if pathname == '/' or pathname == '/constitutive_models':
         return app_constitutive_models_layout
     elif pathname == '/materials_comparison':
@@ -584,4 +596,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
