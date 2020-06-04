@@ -88,18 +88,10 @@ def generate_data_table(dataframe, max_rows=10):
 
 def read_csv_exp_data_files(material_name):
     file = github_raw_url + material_name.replace(" ", "%20") + '.csv' # Replace space by %20 for html url 
-    header = pd.read_csv(file, delimiter = ';', usecols = ["PARAMETER", "INFO"]).head(15).to_dict('records')
+    header = pd.read_csv(file, delimiter = ';', usecols = ["PARAMETER", "INFO", "URL"]).head(15)
     data = pd.read_csv(file, delimiter = ';',skiprows=18, names = ['Time (s)','True Strain','True Stress (MPa)','Engineering Strain','Engineering Stress (MPa)']) # the column headers are on line 16 from the top of the file   
     return data, header
 
-
-# CI DESSOUS A VIRER
-# def plot_exp_data(materials):
-#     for i in materials:
-#         print(i)
-#         [data,header] = read_csv_exp_data_files(i)
-#         print(data)
-#     return data
 
 
 #############################################################################
@@ -133,17 +125,14 @@ def optimization(model,dataframe):
     return df_model_param, data_model, aic
 
 
-
-#####file2 = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/RTV615.csv'
-######data = pd.read_csv(file2, delimiter = ';',skiprows=16, names = ['Time (s)','True Strain','True Stress (MPa)','Eng. Strain','Eng. Stress (MPa)']) # the column headers are on line 8 from the top of the file 
-
-
 # URL on the Github where the raw files are stored
 github_url = 'https://github.com/LucMarechal/Soft-Robotics-Materials-Database/tree/master/Tensile-Tests-Data'
 github_raw_url = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/'
+
 # Content of the GitHub repository. Lists all *.csv file name in the database
 materials = list_files(github_url)
 nb_materials_in_db = len(materials)
+
 # Constitutive models
 models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Hookean', 'Humphrey'])
 
@@ -155,6 +144,8 @@ nav = html.Nav(className = "nav nav-pills", children=[
     html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki', target='_blank'),
     html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database', target='_blank'),
     ]),
+
+
 
 #############################################################################
 #  MAIN PAGE
@@ -173,8 +164,8 @@ app.layout = html.Div([
 
         dbc.Col(
         #html.Div(className = "footer", children=[
-        [html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='42%'),href='https://www.univ-smb.fr/symme/en/'),
-        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='42%'),href='https://www.univ-smb.fr/en/',style={'padding': '15px'}),
+        [html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='42%'),href='https://www.univ-smb.fr/symme/en/', target='_blank'),
+        html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='42%'),href='https://www.univ-smb.fr/en/',style={'padding': '15px'}, target='_blank'),
         ], align="center", width=2),
 
     ], justify="between"),   
@@ -186,7 +177,7 @@ app.layout = html.Div([
 
 
 #############################################################################
-#  PAGE CONSTITUTIVE MODELS
+#  PAGE : CONSTITUTIVE MODELS
 #############################################################################
 app_constitutive_models_layout = html.Div(children=[
 
@@ -205,16 +196,6 @@ app_constitutive_models_layout = html.Div(children=[
             style={'width': '100%', 'marginBottom': '1em'}
         ),
         
-        # dcc.RadioItems(
-    	   #  id='radio-item-data-type',
-    	   #  options=[
-        # 	    {'label': 'True', 'value': 'True'},
-        # 	    {'label': 'Engineering', 'value': 'Engineering'},
-    	   #  ],
-    	   #  value='True',
-        #     style={'marginBottom': '1em'}
-        # ),
-
         dash_table.DataTable(
             id='table-material-info',
             columns=[{"name": 'PARAMETER', "id": "PARAMETER"}, {"name": 'INFO', "id": "INFO"}],#[],
@@ -277,7 +258,7 @@ app_constitutive_models_layout = html.Div(children=[
 
         html.Div(id='AIC-model',children=''' '''),
 
-#        html.Button('Buy Material', id='button-buy-material', style={'marginTop': '3em'}),
+        html.A(html.Button('Vendor Material Info', id='button-vendor-material-info', style={'marginTop': '3em'}), id='url-material', href='', target='_blank'),
     ], width=2),
 
 
@@ -311,7 +292,7 @@ app_constitutive_models_layout = html.Div(children=[
 
 
 #############################################################################
-#  PAGE MATERIALS COMPARISON
+#  PAGE : MATERIALS COMPARISON
 #############################################################################
 app_materials_comparison_layout = html.Div(children=[
 
@@ -404,7 +385,7 @@ def update_constitutve_model_formula(constitutive_model):
         [Output('intermediate-model-data', 'children'),
         Output('table-param', 'data'),
         Output('table-param', 'columns'),
-        Output('header-table-param', 'children'),
+        Output('header-table-param', 'children'),      
         Output('AIC-model', 'children')],
         [Input('button-fit-data', 'n_clicks'),
         Input('dropdown-material', 'value'),
@@ -418,7 +399,8 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_t
     table_param_data = []
     header_table_param = ''' '''
     aic_model = ''' '''
-    
+    url_material = 'https://github.com/LucMarechal/Soft-Robotics-Materials-Database'
+
     ctx = dash.callback_context
     triggered_id = ctx.triggered[0]['prop_id'].split('.')[0] # Determining which Input has fired
 
@@ -442,17 +424,6 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_t
     return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model
 
 
-# @app.callback(
-#         Input('button-buy-material', 'n_clicks'),
-#         )
-# def buy_material_on_click_button(n_clicks):
-#     ctx = dash.callback_context
-#     triggered_id = ctx.triggered[0]['prop_id'].split('.')[0] # Determining which Input has fired
-
-#     if triggered_id == "button-fit-data" and n_clicks is not None:
-#        hop=0 # LINK TO WEBSITE
-#     return 0
-
 
 @app.callback(
     Output('output-container-range-slider', 'children'),
@@ -464,6 +435,7 @@ def update_output(slider_value):
 @app.callback(
     [Output('intermediate-exp-data', 'children'),
     Output('table-material-info', 'data'),
+    Output('url-material', 'href'),
     Output('range-slider', 'max'),
     Output('range-slider', 'value')],
     [Input('dropdown-material', 'value'),
@@ -476,7 +448,10 @@ def update_data(material,data_type_toggle):
     [data, header] = read_csv_exp_data_files(material)
     range_slider_max = data[data_type+' Strain'].iloc[-1]
     range_slider_value = [0,range_slider_max]
-    return data.to_json(), header, range_slider_max, range_slider_value # or, more generally, json.dumps(cleaned_df)
+
+    url_material = header['URL'].dropna().values[0] # Get the URL of the material from the csv file header
+
+    return data.to_json(), header.to_dict('records'), url_material, range_slider_max, range_slider_value # or, more generally, json.dumps(cleaned_df)
 
 
 @app.callback(
