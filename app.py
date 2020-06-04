@@ -151,9 +151,9 @@ models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Ho
 nav = html.Nav(className = "nav nav-pills", children=[
     dcc.Link("Constitutive Models", href='/constitutive_models'),
     dcc.Link("Materials Comparison", href='/materials_comparison'),
-    html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation"),
-    html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki'),
-    html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database'),
+    html.A("Setup & Characterisation", href="https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation", target='_blank'),
+    html.A("About",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki', target='_blank'),
+    html.A("GitHub",href='https://github.com/LucMarechal/Soft-Robotics-Materials-Database', target='_blank'),
     ]),
 
 #############################################################################
@@ -276,6 +276,8 @@ app_constitutive_models_layout = html.Div(children=[
             ),
 
         html.Div(id='AIC-model',children=''' '''),
+
+#        html.Button('Buy Material', id='button-buy-material', style={'marginTop': '3em'}),
     ], width=2),
 
 
@@ -438,6 +440,18 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_t
     	    aic_model = "AIC : " + np.array2string(aic.round(1))
 
     return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model
+
+
+# @app.callback(
+#         Input('button-buy-material', 'n_clicks'),
+#         )
+# def buy_material_on_click_button(n_clicks):
+#     ctx = dash.callback_context
+#     triggered_id = ctx.triggered[0]['prop_id'].split('.')[0] # Determining which Input has fired
+
+#     if triggered_id == "button-fit-data" and n_clicks is not None:
+#        hop=0 # LINK TO WEBSITE
+#     return 0
 
 
 @app.callback(
