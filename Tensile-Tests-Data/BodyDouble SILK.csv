@@ -1,4 +1,4 @@
-PARAMETER;INFO;;;
+PARAMETER;INFO;URL;;
 Thickness (mm);3;;;
 Width (mm);6;;;
 Length (mm);33;;;
@@ -12,7 +12,7 @@ Grippers;Instron 2710-010 ;;;
 Strain Measurement;Global;;;
 Strain calculation;Derived from the machine crosshead displacement readings;;;
 Lab;Univ. Savoie Mont Blanc - SYMME Lab, 7400 Annecy, France;;;
-Material supplier;Smooth-On;;;
+Material supplier;Smooth-On;https://www.smooth-on.com/products/body-double-silk/;;
 Material;BodyDouble SILK;;;
 ;;;;
 Time (s);True Strain;True Stress (MPa);Engineering Strain;Engineering Stress (MPa)
