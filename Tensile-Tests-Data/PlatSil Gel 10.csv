@@ -1,4 +1,4 @@
-PARAMETER;INFO;;;
+PARAMETER;INFO;URL;;
 Specimen Thickness (mm);3;;;
 Specimen Width (mm);6;;;
 Specimen Length (mm);33;;;
@@ -12,8 +12,8 @@ Grippers;Instron 2710-010 ;;;
 Strain Measurement;Global;;;
 Strain calculation;Derived from the machine crosshead displacement readings;;;
 Lab;Univ. Savoie Mont Blanc - SYMME Lab, 7400 Annecy, France;;;
-Material supplier;Smooth-On;;;
-Material;Polytek;;;
+Material supplier;Polytek;https://www.polytek.com/products/platsil-gel-10;;
+Material;PlatSil Gel 10;;;
 ;;;;
 Time (s);True Strain;True Stress (MPa);Engineering Strain;Engineering Stress (MPa)
 0.2;0.043625;0.003945870595;0.044595;0.00378
