@@ -298,72 +298,29 @@ app_materials_comparison_layout = html.Div(children=[
 
 html.H1(children='Materials Comparison',style={'padding': '15px'}),
 
-#dbc.Row([
+dbc.Row([
+    dbc.Col([
+        html.Img(src=app.get_asset_url('logo_soroDB.svg'), style={'width': '30%', 'display': 'inline-block'}), 
+        html.Div(nb_materials_in_db, className="w3-badge w3-xlarge w3-sorored w3-padding", style={'display': 'inline-block'}),
+        html.Div("materials in the Database", style={'margin-bottom': '100px'}),
+        html.Div("Double click on lengend to isolate one trace. Show or hide trace by click on the materials name.", style={'margin-bottom': '50px'}),
+                
         dbc.Row([
-            dbc.Col([
-                html.Img(src=app.get_asset_url('logo_soroDB.svg'), style={'width': '30%', 'display': 'inline-block'}), 
-                html.Div(nb_materials_in_db, className="w3-badge w3-xlarge w3-sorored w3-padding", style={'display': 'inline-block'}),
-                html.Div("materials in the Database", style={'margin-bottom': '100px'}),
-                html.Div("To show or hide curves, click on the materials name in the legend.", style={'margin-bottom': '50px'}),
+            daq.BooleanSwitch(
+                id='toggle-true-eng-data',
+                on=False,
+                #label='True / Engineering',
+                #labelPosition='bottom',
+                color=sorored,
+                style={'padding': '20px'} 
+            ),
+            html.Label('True / Engineering'),
+        ]),
                 
-                dbc.Row([
-                    daq.BooleanSwitch(
-                        id='toggle-true-eng-data',
-                        on=False,
-                        #label='True / Engineering',
-                        #labelPosition='bottom',
-                        color=sorored,
-                        style={'padding': '20px'} 
-                    ),
-                    html.Label('True / Engineering'),
-                ]),
-                
-                ], width=2),
-            dbc.Col([html.Div(id='text-loading-data',children=["Loading data..."], style={"color": sorored,"font-weight": 'bold', "text-align": 'center'}), 
-                    dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube')], width={"size": 10}),
-        ],no_gutters=True,style={'padding': '20px', 'marginBottom': '-1.5em'}),
-        #dbc.Badge("18",color="light", className="ml-1",style={'padding': '15px'}),
-        #dbc.Row([
-        #html.Div('\U000024F2', style={'padding': '15x', 'color': sorored, 'font-size': '90px'}), #, 'marginBottom': '0.1em'
-        #html.Div(children='materials currently in the database'),
-        #]),
-   
-        # daq.BooleanSwitch(
-        #     id='toggle-switch-all-selection',
-        #     on=False,
-        #     label='Show All / Selection only',
-        #     labelPosition='right',
-        #     color=sorored, 
-        # ),    
-
-## USELESS
-        # dash_table.DataTable(
-        #     id='table-materials-list',
-        #     columns=[{"name": 'MATERIALS', "id": "materials"}],
-        #     data=[
-        #         dict(materials=mat, **{p: 0 for p in materials})
-        #         for mat in materials
-        #     ],
-        #     style_cell={'textAlign': 'left', 'textOverflow': 'ellipsis'},
-        #     style_table={
-        #     'maxWidth': '300px',
-        #     'overflowY': 'scroll',
-        #     'padding': '30px'
-        #     },
-        #     ),           
-      
- #       dbc.Row([
-#            dbc.Col(daq.BooleanSwitch(
-#                id='toggle-true-eng-data',
-#                on=False,
-#                label='True / Engineering',
-#                labelPosition='bottom',
-#                color=sorored,
-#                style={'padding': '20px'} 
-#            )),
-#            dbc.Col(html.Label('True / Engineering')),
-#        ], style={'marginBottom': '-0.9em'}), 
-
+        ], width=2),
+    dbc.Col([html.Div(id='text-loading-data',children=["Loading data..."], style={"color": sorored,"font-weight": 'bold', "text-align": 'center'}), 
+    dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube')], width={"size": 10}),
+    ],no_gutters=True,style={'padding': '20px', 'marginBottom': '-1.5em'}),
 
 ]),
 
@@ -538,7 +495,7 @@ def update_graph_comparison(data_type_toggle):
         traces_data.append(trace_exp_data)
 
     figure={
-        'data': traces_data,#[trace_exp_data,trace_exp_data],
+        'data': traces_data,
         'layout': dict(
             xaxis={'title': data_type + ' Strain ' + unicode_epsilon},
             yaxis={'title': data_type + ' Stress ' + unicode_sigma + ' (MPa)'},
@@ -557,18 +514,6 @@ def update_graph_comparison(data_type_toggle):
     return figure, loading_text
 
 
-# @app.callback(
-#     Output('text-loading-data', 'children'),
-#     [Input('loading-graph', 'is_loading')]
-#     )
-# def display_loading_text(is_loading):
-#     print('ok')
-#     if is_loading is True:
-#         loading_text = ""
-#     else:
-#         loading_text = "Loading data..."
-#     return loading_text
-
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
@@ -585,4 +530,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
