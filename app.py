@@ -103,9 +103,9 @@ def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):
     residuals = theo_stress - exp_stress 
     return residuals
 
-def optimization(model,dataframe):
+def optimization(model, order, dataframe):
     # Hyperelastic object
-    hyperelastic = Hyperelastic(model, np.array([0]), order=3)  # Order is fixed to 3 for now for Ogden and the others models when applicable
+    hyperelastic = Hyperelastic(model, np.array([0]), order)  # Order is set to 3 for now for Ogden and the others models when applicable
     
     exp_strain = dataframe['True Strain'].values
     exp_stress = dataframe['True Stress (MPa)'].values
@@ -220,6 +220,13 @@ app_constitutive_models_layout = html.Div(children=[
             value=models[0],  # Default value
             style={'width': '100%', 'marginBottom': '1em'}
         ),
+        html.Label('Order'),
+        dcc.Dropdown(
+            id='dropdown-order-model',
+            options=[{'label': i, 'value': i} for i in range(1,4)],   # dynamically fill in the dropdown menu
+            value=3,  # Default value
+            style={'width': '50%', 'marginBottom': '1em'}
+        ), 
 
         # NOT WORKinG : To display the constitutive model mathematical equation 
         # dcc.Textarea(
@@ -303,7 +310,7 @@ dbc.Row([
         html.Img(src=app.get_asset_url('logo_soroDB.svg'), style={'width': '30%', 'display': 'inline-block'}), 
         html.Div(nb_materials_in_db, className="w3-badge w3-xlarge w3-sorored w3-padding", style={'display': 'inline-block'}),
         html.Div("materials in the Database", style={'margin-bottom': '100px'}),
-        html.Div("Double click on lengend to isolate one trace. Show or hide trace by click on the materials name.", style={'margin-bottom': '50px'}),
+        html.Div("Double click on legend to isolate one trace. Show or hide trace by click on the materials name.", style={'margin-bottom': '50px'}),
                 
         dbc.Row([
             daq.BooleanSwitch(
@@ -347,10 +354,11 @@ def update_constitutve_model_formula(constitutive_model):
         [Input('button-fit-data', 'n_clicks'),
         Input('dropdown-material', 'value'),
         Input('dropdown-constitutive-model', 'value'),
+        Input('dropdown-order-model', 'value'),
         Input('toggle-data-type', 'on')],
         [State('intermediate-selected-exp-data', 'children'),
         State('range-slider', 'value')])
-def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_toggle, jsonified_selected_exp_data,slider_value):
+def fit_data_on_click_button(n_clicks, material, constitutive_model, order, data_type_toggle, jsonified_selected_exp_data,slider_value):
     model_data = pd.DataFrame({'True Strain' : [], 'True Stress (MPa)' : []})  # Model is computed only for True Strain True Stress Data for now
     table_param_column = []
     table_param_data = []
@@ -368,15 +376,16 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, data_type_t
 
     if triggered_id == "button-fit-data" and data_type == 'True':
         if n_clicks is not None:
-    	    selected_exp_data = pd.read_json(jsonified_selected_exp_data)
-    	    df_model_param, model_data, aic = optimization(constitutive_model, selected_exp_data)     # Check here IF THERE IS A BUG  !!!!
-    	    
-    	    df_model_param = df_model_param.round(4) # To send to dash_table.DataTable 
+            selected_exp_data = pd.read_json(jsonified_selected_exp_data)
+            df_model_param, model_data, aic = optimization(constitutive_model, order, selected_exp_data)
+            print(df_model_param)
+            df_model_param = df_model_param.round(4) # To send to dash_table.DataTable
+            
 
-    	    table_param_data = df_model_param.to_dict('records')
-    	    table_param_column = [{"name": i, "id": i} for i in df_model_param.columns]
-    	    header_table_param = constitutive_model + " parameters : " + '\n' + '(on ε ' + data_type + ' range {})'.format([f"{num:.2f}" for num in slider_value])#slider_value)
-    	    aic_model = "AIC : " + np.array2string(aic.round(1))
+            table_param_data = df_model_param.to_dict('records')
+            table_param_column = [{"name": i, "id": i} for i in df_model_param.columns]
+            header_table_param = constitutive_model + " parameters : " + '\n' + '(on ε ' + data_type + ' range {})'.format([f"{num:.2f}" for num in slider_value])#slider_value)
+            aic_model = "AIC : " + np.array2string(aic.round(1))
 
     return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model
 

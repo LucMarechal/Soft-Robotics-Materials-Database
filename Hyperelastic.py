@@ -20,7 +20,7 @@ class Hyperelastic:
             initialGuessAlpha = np.array([0.2]*self.order)
             self.initialGuessParam = np.append(initialGuessMu,initialGuessAlpha)
             self.nbparam = self.order*2
-            self.param_names = ["µ1","µ2","µ3","α1","α2","α3"]
+            self.param_names = ["µ1","µ2","µ3","α1","α2","α3"][0:order*2]
         elif model == 'Neo Hookean':
             self.initialGuessParam = np.array([0.1])
             self.nbparam = 1            
@@ -28,11 +28,11 @@ class Hyperelastic:
         elif model == 'Yeoh':
             self.initialGuessParam = np.array([0.1]*self.order)
             self.nbparam = self.order
-            self.param_names = ["C1","C2","C3"] 
+            self.param_names = ["C1","C2","C3"][0:order] 
         elif model == 'Mooney Rivlin':
             self.initialGuessParam = np.array([0.1]*self.order)
             self.nbparam = self.order
-            self.param_names = ["C10","C01","C20"]
+            self.param_names = ["C10","C01","C20"][0:order]
         elif model == 'Gent':
             self.initialGuessParam = np.array([0.1]*2)
             self.nbparam = 2
