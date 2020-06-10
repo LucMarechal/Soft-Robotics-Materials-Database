@@ -195,6 +195,8 @@ app_constitutive_models_layout = html.Div(children=[
             value='RTV615',
             style={'width': '100%', 'marginBottom': '1em'}
         ),
+
+        html.A(html.Button('Vendor Material Info', id='button-vendor-material-info', style={'marginTop': '-0.2em', 'marginBottom': '0.5em'}), id='url-material', href='', target='_blank'),
         
         dash_table.DataTable(
             id='table-material-info',
@@ -284,7 +286,6 @@ app_constitutive_models_layout = html.Div(children=[
 
         html.Div(id='AIC-model',children=''' '''),
 
-        html.A(html.Button('Vendor Material Info', id='button-vendor-material-info', style={'marginTop': '3em'}), id='url-material', href='', target='_blank'),
     ], width=2),
 
 
@@ -599,4 +600,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
