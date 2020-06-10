@@ -214,6 +214,13 @@ app_constitutive_models_layout = html.Div(children=[
     dbc.Col([
         # Dropdown to select the constitutive model     
         html.Label('Constitutive model'),      
+        
+        dcc.Input(
+            id='textarea-constitutive-model',
+            value='',
+            style={'display': 'none'}
+        ),
+
         dcc.Dropdown(
             id='dropdown-constitutive-model',
             options=[{'label': i, 'value': i} for i in models],   # dynamically fill in the dropdown menu
@@ -242,6 +249,18 @@ app_constitutive_models_layout = html.Div(children=[
 
         dbc.Row([
             daq.BooleanSwitch(
+                id='toggle-fit-mode',
+                on=False,
+                #label='True / Engineering',
+                #labelPosition='bottom',
+                color=sorored,
+                style={'padding': '10px'} 
+            ),
+            html.Label('Model selection : Manual/Auto'),
+        ]),
+
+        dbc.Row([
+            daq.BooleanSwitch(
                 id='toggle-data-type',
                 on=False,
                 #label='True / Engineering',
@@ -249,7 +268,7 @@ app_constitutive_models_layout = html.Div(children=[
                 color=sorored,
                 style={'padding': '10px'} 
             ),
-            html.Label('True / Engineering'),
+            html.Label('Data type: True/Engineering'),
         ]),
 
         html.Button('Fit Data', id='button-fit-data', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
@@ -295,6 +314,7 @@ app_constitutive_models_layout = html.Div(children=[
     html.Div(id='intermediate-exp-data', style={'display': 'none'}),  
     html.Div(id='intermediate-model-data', style={'display': 'none'}),
     html.Div(id='intermediate-selected-exp-data', style={'display': 'none'}),
+    html.Div(id='intermediate-best-model', style={'display': 'none'}),
 ]),
 
 
@@ -338,11 +358,17 @@ dbc.Row([
 #  CALLBACKS
 #############################################################################
 @app.callback(
-        Output('constitutive-model-formula', 'src'),
-        [Input('dropdown-constitutive-model', 'value')])
-def update_constitutve_model_formula(constitutive_model):
-    formula_image = app.get_asset_url(constitutive_model+'.svg')
-    return formula_image
+        [Output('dropdown-constitutive-model', 'style'),
+        Output('textarea-constitutive-model', 'style')],
+        [Input('toggle-fit-mode', 'on')])
+def show_hide_constitutve_model_dropdown(fit_mode):
+    if fit_mode is True: # auto mode
+        style_dropdown={'display': 'none'}
+        style_textarea={'width': '100%', 'marginBottom': '1em'}
+    else:
+        style_dropdown={'width': '100%', 'marginBottom': '1em'}
+        style_textarea={'display': 'none'}
+    return style_dropdown, style_textarea
 
 
 @app.callback(
@@ -350,20 +376,27 @@ def update_constitutve_model_formula(constitutive_model):
         Output('table-param', 'data'),
         Output('table-param', 'columns'),
         Output('header-table-param', 'children'),      
-        Output('AIC-model', 'children')],
+        Output('AIC-model', 'children'),
+        Output('intermediate-best-model', 'children'),
+        Output('textarea-constitutive-model', 'value'),
+        Output('constitutive-model-formula', 'src')],  #Test
         [Input('button-fit-data', 'n_clicks'),
         Input('dropdown-material', 'value'),
-        Input('dropdown-constitutive-model', 'value'),
+        Input('dropdown-constitutive-model', 'options'), 
+        Input('dropdown-constitutive-model', 'value'),    
         Input('dropdown-order-model', 'value'),
-        Input('toggle-data-type', 'on')],
+        Input('toggle-data-type', 'on'),
+        Input('toggle-fit-mode', 'on')],
         [State('intermediate-selected-exp-data', 'children'),
         State('range-slider', 'value')])
-def fit_data_on_click_button(n_clicks, material, constitutive_model, order, data_type_toggle, jsonified_selected_exp_data,slider_value):
+def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_models, selected_constitutive_model, order, data_type_toggle, fit_mode_toggle, jsonified_selected_exp_data,slider_value):
     model_data = pd.DataFrame({'True Strain' : [], 'True Stress (MPa)' : []})  # Model is computed only for True Strain True Stress Data for now
     table_param_column = []
     table_param_data = []
+    models = []
     header_table_param = ''' '''
     aic_model = ''' '''
+    best_model = ''
     url_material = 'https://github.com/LucMarechal/Soft-Robotics-Materials-Database'
 
     ctx = dash.callback_context
@@ -374,20 +407,46 @@ def fit_data_on_click_button(n_clicks, material, constitutive_model, order, data
     else:
         data_type = 'True'
 
+    if fit_mode_toggle is True:
+        for dicts in all_constitutive_models:
+            models.append(dicts["label"])
+    else:
+        models.append(selected_constitutive_model)
+
+
     if triggered_id == "button-fit-data" and data_type == 'True':
-        if n_clicks is not None:
+        if n_clicks_fit_data is not None:
             selected_exp_data = pd.read_json(jsonified_selected_exp_data)
-            df_model_param, model_data, aic = optimization(constitutive_model, order, selected_exp_data)
-            print(df_model_param)
-            df_model_param = df_model_param.round(4) # To send to dash_table.DataTable
             
+            # loop to test all constitutive models and find the best one
+            for num, constitutive_model in enumerate(models):
+                # Optimization algorithm
+                df_model_param, model_data_optimized, aic = optimization(constitutive_model, order, selected_exp_data)
+                # initialize best aic to the first tested model
+                if num == 0:
+                    best_aic = aic
+                
+                if aic <= best_aic:
+                    best_aic = aic
+                    df_model_param = df_model_param.round(4) # To send to dash_table.DataTable
+                    model_data = model_data_optimized
+                    table_param_data = df_model_param.to_dict('records')
+                    table_param_column = [{"name": i, "id": i} for i in df_model_param.columns]
+                    best_model = constitutive_model
+                    header_table_param = best_model + " parameters : " + '\n' + '(on ε ' + data_type + ' data range {})'.format([f"{num:.2f}" for num in slider_value])#slider_value)
+                    aic_model = "AIC : " + np.array2string(aic.round(1))
 
-            table_param_data = df_model_param.to_dict('records')
-            table_param_column = [{"name": i, "id": i} for i in df_model_param.columns]
-            header_table_param = constitutive_model + " parameters : " + '\n' + '(on ε ' + data_type + ' range {})'.format([f"{num:.2f}" for num in slider_value])#slider_value)
-            aic_model = "AIC : " + np.array2string(aic.round(1))
+    #update displayed formula
+    if fit_mode_toggle is True: # auto mode
+        if triggered_id == "button-fit-data":
+            formula_image = app.get_asset_url(best_model+'.svg')
+        else:
+            formula_image = app.get_asset_url('blank.svg')
+    else:
+        formula_image = app.get_asset_url(selected_constitutive_model+'.svg')
 
-    return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model
+
+    return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula_image
 
 
 
@@ -428,9 +487,10 @@ def update_data(material,data_type_toggle):
     Input('dropdown-constitutive-model', 'value'),
     Input('intermediate-model-data', 'children')],
     [State('intermediate-exp-data', 'children'),
+    State('intermediate-best-model', 'children'),
     State('toggle-data-type', 'on')]
     )
-def update_figure(material,slider_range,constitutive_model,jsonified_model_data,jsonified_exp_data,data_type_toggle):
+def update_figure(material,slider_range,constitutive_model,jsonified_model_data,jsonified_exp_data,best_model,data_type_toggle):
     exp_data = pd.read_json(jsonified_exp_data)
     idx_low= pd.Index(exp_data['True Strain']).get_loc(slider_range[0],method='nearest')   # Find the index of the nearest strain value selected with the slider
     idx_high = pd.Index(exp_data['True Strain']).get_loc(slider_range[1],method='nearest') # Find the index of the nearest strain value selected with the slider
@@ -460,7 +520,7 @@ def update_figure(material,slider_range,constitutive_model,jsonified_model_data,
             mode='lines', #'lines+markers'
             line={'color' : sorored},
             opacity=1,
-            name=constitutive_model+" model") 
+            name=best_model+" model") 
 
     figure={
         'data': [trace_exp_data,trace_model_data],
@@ -539,4 +599,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
