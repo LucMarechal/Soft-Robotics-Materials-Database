@@ -6,7 +6,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 __maintainer__ = "Luc Marechal"
 __email__ = "luc.marechal(at)univ-smb(dot)fr"
-__status__ = "Prod0"
+__status__ = "Prod1"
 
 # Resources and documentation
 # Beautifulsoup : https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3
@@ -103,12 +103,12 @@ def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):
     residuals = theo_stress - exp_stress 
     return residuals
 
-def optimization(model, order, dataframe):
+def optimization(model, order, dataframe, data_type):
     # Hyperelastic object
     hyperelastic = Hyperelastic(model, np.array([0]), order)  # Order is set to 3 for now for Ogden and the others models when applicable
     
-    exp_strain = dataframe['True Strain'].values
-    exp_stress = dataframe['True Stress (MPa)'].values
+    exp_strain = dataframe[data_type+' Strain'].values
+    exp_stress = dataframe[data_type+' Stress (MPa)'].values
     # The least_squares package calls the Levenberg-Marquandt algorithm.
     # best-fit paramters are kept within optim_result.x
     optim_result = least_squares(objectiveFun_Callback, hyperelastic.initialGuessParam, method ='lm', args=(exp_strain, exp_stress, hyperelastic))
@@ -117,7 +117,7 @@ def optimization(model, order, dataframe):
     df_model_param = pd.DataFrame(optim_parameters, index=hyperelastic.param_names, columns=[model]).transpose()
     
     theo_stress = hyperelastic.ConsitutiveModel(optim_parameters, exp_strain)
-    data_model = pd.DataFrame({'True Strain': exp_strain, 'True Stress (MPa)': theo_stress})
+    data_model = pd.DataFrame({data_type+' Strain': exp_strain, data_type+' Stress (MPa)': theo_stress})
 	
     stats = HyperelasticStats(exp_stress, theo_stress, hyperelastic.nbparam)
     aic = stats.aic()
@@ -391,7 +391,6 @@ def show_hide_constitutve_model_dropdown(fit_mode):
         [State('intermediate-selected-exp-data', 'children'),
         State('range-slider', 'value')])
 def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_models, selected_constitutive_model, order, data_type_toggle, fit_mode_toggle, jsonified_selected_exp_data,slider_value):
-    model_data = pd.DataFrame({'True Strain' : [], 'True Stress (MPa)' : []})  # Model is computed only for True Strain True Stress Data for now
     table_param_column = []
     table_param_data = []
     models = []
@@ -408,6 +407,9 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
     else:
         data_type = 'True'
 
+    model_data = pd.DataFrame({data_type+' Strain' : [], data_type+' Stress (MPa)' : []})
+
+
     if fit_mode_toggle is True:
         for dicts in all_constitutive_models:
             models.append(dicts["label"])
@@ -415,14 +417,14 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
         models.append(selected_constitutive_model)
 
 
-    if triggered_id == "button-fit-data" and data_type == 'True':
+    if triggered_id == "button-fit-data":
         if n_clicks_fit_data is not None:
             selected_exp_data = pd.read_json(jsonified_selected_exp_data)
             
             # loop to test all constitutive models and find the best one
             for num, constitutive_model in enumerate(models):
                 # Optimization algorithm
-                df_model_param, model_data_optimized, aic = optimization(constitutive_model, order, selected_exp_data)
+                df_model_param, model_data_optimized, aic = optimization(constitutive_model, order, selected_exp_data, data_type)
                 # initialize best aic to the first tested model
                 if num == 0:
                     best_aic = aic
@@ -492,22 +494,19 @@ def update_data(material,data_type_toggle):
     State('toggle-data-type', 'on')]
     )
 def update_figure(material,slider_range,constitutive_model,jsonified_model_data,jsonified_exp_data,best_model,data_type_toggle):
-    exp_data = pd.read_json(jsonified_exp_data)
-    idx_low= pd.Index(exp_data['True Strain']).get_loc(slider_range[0],method='nearest')   # Find the index of the nearest strain value selected with the slider
-    idx_high = pd.Index(exp_data['True Strain']).get_loc(slider_range[1],method='nearest') # Find the index of the nearest strain value selected with the slider
-    selected_exp_data = exp_data[idx_low:idx_high] # Trimm the data to the selected range
-
     if data_type_toggle is True:
         data_type = 'Engineering'
     else:
         data_type = 'True'
 
+    exp_data = pd.read_json(jsonified_exp_data)
+    idx_low= pd.Index(exp_data[data_type+' Strain']).get_loc(slider_range[0],method='nearest')   # Find the index of the nearest strain value selected with the slider
+    idx_high = pd.Index(exp_data[data_type+' Strain']).get_loc(slider_range[1],method='nearest') # Find the index of the nearest strain value selected with the slider
+    selected_exp_data = exp_data[idx_low:idx_high] # Trimm the data to the selected range
+
     model_data = pd.read_json(jsonified_model_data)
     
-    if data_type == 'True':
-    	selected_model_data = model_data[idx_low:idx_high] # Trimm the data to the selected range
-    else:
-        selected_model_data = pd.DataFrame({'Engineering Strain' : [], 'Engineering Stress (MPa)' : []})
+    selected_model_data = model_data[idx_low:idx_high] # Trimm the data to the selected range
 
     trace_exp_data = dict(x = selected_exp_data[data_type+' Strain'].values,
                 y = selected_exp_data[data_type+' Stress (MPa)'].values,
@@ -553,7 +552,7 @@ def update_graph_comparison(data_type_toggle):
     materials = list_files(github_url)
     
     traces_data = []
-    for i, material in enumerate(materials):#material in materials:
+    for i, material in enumerate(materials):
         [exp_data,header] = read_csv_exp_data_files(material)
 
         trace_exp_data = dict(x = exp_data[data_type+' Strain'].values,
@@ -587,7 +586,6 @@ def update_graph_comparison(data_type_toggle):
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    print(pathname) # For DEBUG only §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
     if pathname == '/' or pathname == '/constitutive_models':
         return app_constitutive_models_layout
     elif pathname == '/materials_comparison':
@@ -600,4 +598,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
