@@ -71,19 +71,19 @@ def list_files(url):
         materials.append(filename.extract().get_text()[:-4])  # -4 to remove the file extension .csv
     return materials
 
-
-def generate_data_table(dataframe, max_rows=10):
-    dataframe=dataframe.round(4)
-    return html.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
+# DELETE BELLOW - OBSOLETE
+# def generate_data_table(dataframe, max_rows=10):
+#     dataframe=dataframe.round(4)
+#     return html.Table([
+#         html.Thead(
+#             html.Tr([html.Th(col) for col in dataframe.columns])
+#         ),
+#         html.Tbody([
+#             html.Tr([
+#                 html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+#             ]) for i in range(min(len(dataframe), max_rows))
+#         ])
+#     ])
 
 
 def read_csv_exp_data_files(material_name):
@@ -105,7 +105,7 @@ def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):
 
 def optimization(model, order, dataframe, data_type):
     # Hyperelastic object
-    hyperelastic = Hyperelastic(model, np.array([0]), order)  # Order is set to 3 for now for Ogden and the others models when applicable
+    hyperelastic = Hyperelastic(model, np.array([0]), order, data_type)
     
     exp_strain = dataframe[data_type+' Strain'].values
     exp_stress = dataframe[data_type+' Stress (MPa)'].values
@@ -342,11 +342,40 @@ dbc.Row([
                 color=sorored,
                 style={'padding': '20px'} 
             ),
-            html.Label('True / Engineering'),
+            html.Label('Data type: True/Engineering'),
         ]),
+
+        html.Label('Constitutive model'),
+        dcc.Dropdown(
+            id='dropdown-my-constitutive-model',
+            options=[{'label': i, 'value': i} for i in models],   # dynamically fill in the dropdown menu
+            value=models[0],  # Default value
+            style={'width': '100%', 'marginBottom': '1em'}
+        ),
+        
+        html.Label('Order'),
+        dcc.Dropdown(
+            id='dropdown-my-order-model',
+            options=[{'label': i, 'value': i} for i in range(1,4)],   # dynamically fill in the dropdown menu
+            value=3,  # Default value
+            style={'width': '50%', 'marginBottom': '1em'}
+        ),
+
+        dash_table.DataTable(
+            id='my-table-param',
+            columns=[],
+            data=[],
+            editable=True,
+            ),
+
+        html.Button('Find material', id='button-find-material', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
+
+        html.Div(id='output-test',children=[""]), 
                 
         ], width=2),
+    
     dbc.Col([html.Div(id='text-loading-data',children=["Loading data..."], style={"color": sorored,"font-weight": 'bold', "text-align": 'center'}), 
+    
     dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube')], width={"size": 10}),
     ],no_gutters=True,style={'padding': '20px', 'marginBottom': '-1.5em'}),
 
@@ -358,6 +387,34 @@ dbc.Row([
 #############################################################################
 #  CALLBACKS
 #############################################################################
+@app.callback(
+        [Output('my-table-param', 'columns'),
+        Output('my-table-param', 'data')],
+        [Input('dropdown-my-constitutive-model', 'value'),
+        Input('dropdown-my-order-model', 'value')])
+def update_my_table_param(my_constitutive_model, my_model_order):
+    my_hyperelastic = Hyperelastic(my_constitutive_model, np.array([0]), my_model_order)
+    my_param_names = my_hyperelastic.param_names
+    my_table_param_column = [{"name": i, "id": i} for i in my_param_names]
+    my_df = pd.DataFrame(0, index=np.arange(1), columns=my_param_names)
+    my_table_data = my_df.to_dict('records')
+    return my_table_param_column, my_table_data
+
+
+@app.callback(
+        Output('output-test', 'children'),
+        [Input('button-find-material', 'n_clicks'),
+        Input('my-table-param', 'data')],
+        [State('dropdown-my-constitutive-model', 'value'),
+        State('dropdown-my-order-model', 'value')],
+        )
+def find_material_on_click_button(n_clicks_find_material, my_model_param, my_constitutive_model, my_model_order):
+    my_hyperelastic = Hyperelastic(my_constitutive_model, my_model_param, my_model_order)
+
+    print(my_hyperelastic)
+    return 'ok'
+
+
 @app.callback(
         [Output('dropdown-constitutive-model', 'style'),
         Output('textarea-constitutive-model', 'style')],
@@ -447,7 +504,6 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
             formula_image = app.get_asset_url('blank.svg')
     else:
         formula_image = app.get_asset_url(selected_constitutive_model+'.svg')
-
 
     return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula_image
 
@@ -598,4 +654,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
