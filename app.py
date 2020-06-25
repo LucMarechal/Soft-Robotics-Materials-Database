@@ -182,8 +182,12 @@ app_constitutive_models_layout = html.Div(children=[
             style={'width': '100%', 'marginBottom': '1em'}
         ),
 
-        html.A(html.Button('Vendor Material Info', id='button-vendor-material-info', style={'marginTop': '-0.2em', 'marginBottom': '0.5em'}), id='url-material', href='', target='_blank'),
+        dbc.Row([
+        html.A(html.Button('Vendor Material Info', id='button-vendor-material-info', style={'marginTop': '-0.2em', 'marginBottom': '0.5em','marginLeft': '15px', 'marginRight': '1em', 'padding':'1px 5px'}), id='url-material', href='', target='_blank'),
         
+        html.A(html.Button('Download Raw Data', id='button-download-raw-data', style={'marginTop': '-0.2em', 'marginBottom': '0.5em','padding':'1px 5px'}), id='url-csv-raw-data', href='', target='_blank', download='download'),
+        ]),
+
         dash_table.DataTable(
             id='table-material-info',
             columns=[{"name": 'PARAMETER', "id": "PARAMETER"}, {"name": 'INFO', "id": "INFO"}],#[],
@@ -377,9 +381,11 @@ dbc.Row([
         [Output('my-table-param', 'columns'),
         Output('my-table-param', 'data')],
         [Input('dropdown-my-constitutive-model', 'value'),
-        Input('dropdown-my-order-model', 'value')])
-def update_my_table_param(my_constitutive_model, my_model_order):
-    my_hyperelastic = Hyperelastic(my_constitutive_model, np.array([0]), my_model_order)
+        Input('dropdown-my-order-model', 'value')],
+        [State('toggle-true-eng-data', 'on')],
+        )
+def update_my_table_param(my_constitutive_model, my_model_order, data_type):
+    my_hyperelastic = Hyperelastic(my_constitutive_model, np.array([0]), my_model_order, data_type)
     my_param_names = my_hyperelastic.param_names
     my_table_param_column = [{"name": i, "id": i} for i in my_param_names]
     my_df = pd.DataFrame(0, index=np.arange(1), columns=my_param_names)
@@ -392,13 +398,26 @@ def update_my_table_param(my_constitutive_model, my_model_order):
         [Input('button-find-material', 'n_clicks'),
         Input('my-table-param', 'data')],
         [State('dropdown-my-constitutive-model', 'value'),
-        State('dropdown-my-order-model', 'value')],
+        State('dropdown-my-order-model', 'value'),
+        State('toggle-true-eng-data', 'on')],
         )
-def find_material_on_click_button(n_clicks_find_material, my_model_param, my_constitutive_model, my_model_order):
-    my_hyperelastic = Hyperelastic(my_constitutive_model, my_model_param, my_model_order)
+def find_material_on_click_button(n_clicks_find_material, my_model_param, my_constitutive_model, my_model_order, data_type):
+    my_hyperelastic = Hyperelastic(my_constitutive_model, my_model_param, my_model_order, data_type)
 
     print(my_hyperelastic)
     return 'ok'
+
+### CLICK button download Raw data
+@app.callback(
+        Output('url-csv-raw-data', 'href'),
+        [Input('button-download-raw-data', 'n_clicks')],
+        [State('dropdown-material', 'value')],
+        )
+def download_csv(n_clicks_download_raw_data, material):
+    github_raw_url = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/'
+    csv_raw_file_url = github_raw_url + material + '.csv'
+    print(csv_raw_file_url)
+    return csv_raw_file_url
 
 
 @app.callback(
