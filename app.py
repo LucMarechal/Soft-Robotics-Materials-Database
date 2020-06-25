@@ -231,7 +231,7 @@ app_constitutive_models_layout = html.Div(children=[
         # ),
 
         #html.Div(children=[
-        html.Label('Principal Cauchy Stress', style={'marginBottom': '0.5em'}),
+        html.Label(id='label-constitutive-model-formula', children='Principal Cauchy Stress', style={'marginBottom': '0.5em'}),
         html.Img(id='constitutive-model-formula', src=app.get_asset_url('Ogden.svg'), width='100%', style={'marginBottom': '2em'}),
         #], style={'marginBottom': '1em'}),
 
@@ -423,7 +423,8 @@ def show_hide_constitutve_model_dropdown(fit_mode):
         Output('AIC-model', 'children'),
         Output('intermediate-best-model', 'children'),
         Output('textarea-constitutive-model', 'value'),
-        Output('constitutive-model-formula', 'src')],  #Test
+        Output('label-constitutive-model-formula', 'children'),
+        Output('constitutive-model-formula', 'src')],
         [Input('button-fit-data', 'n_clicks'),
         Input('dropdown-material', 'value'),
         Input('dropdown-constitutive-model', 'options'), 
@@ -491,7 +492,9 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
     else:
         formula_image = app.get_asset_url(selected_constitutive_model + '_' + data_type +'.svg')
 
-    return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula_image
+    formula label = 'Principal' + data_type + 'Cauchy Stress'
+
+    return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula label, formula_image
 
 
 
