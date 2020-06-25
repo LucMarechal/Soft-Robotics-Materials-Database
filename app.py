@@ -492,9 +492,9 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
     else:
         formula_image = app.get_asset_url(selected_constitutive_model + '_' + data_type +'.svg')
 
-    formula label = 'Principal' + data_type + 'Cauchy Stress'
+    formula_label = 'Principal ' + data_type + ' Cauchy Stress'
 
-    return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula label, formula_image
+    return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula_label, formula_image
 
 
 
@@ -643,4 +643,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
