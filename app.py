@@ -71,20 +71,6 @@ def list_files(url):
         materials.append(filename.extract().get_text()[:-4])  # -4 to remove the file extension .csv
     return materials
 
-# DELETE BELLOW - OBSOLETE
-# def generate_data_table(dataframe, max_rows=10):
-#     dataframe=dataframe.round(4)
-#     return html.Table([
-#         html.Thead(
-#             html.Tr([html.Th(col) for col in dataframe.columns])
-#         ),
-#         html.Tbody([
-#             html.Tr([
-#                 html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-#             ]) for i in range(min(len(dataframe), max_rows))
-#         ])
-#     ])
-
 
 def read_csv_exp_data_files(material_name):
     file = github_raw_url + material_name.replace(" ", "%20") + '.csv' # Replace space by %20 for html url 
@@ -499,11 +485,11 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
     #update displayed formula
     if fit_mode_toggle is True: # auto mode
         if triggered_id == "button-fit-data":
-            formula_image = app.get_asset_url(best_model+'.svg')
+            formula_image = app.get_asset_url(best_model + '_' + data_type + '.svg')
         else:
             formula_image = app.get_asset_url('blank.svg')
     else:
-        formula_image = app.get_asset_url(selected_constitutive_model+'.svg')
+        formula_image = app.get_asset_url(selected_constitutive_model + '_' + data_type +'.svg')
 
     return model_data.to_json(), table_param_data, table_param_column, header_table_param, aic_model, best_model, best_model, formula_image
 
