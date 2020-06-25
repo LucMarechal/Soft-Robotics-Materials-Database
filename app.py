@@ -407,17 +407,18 @@ def find_material_on_click_button(n_clicks_find_material, my_model_param, my_con
     print(my_hyperelastic)
     return 'ok'
 
-### CLICK button download Raw data
+
+
 @app.callback(
         Output('url-csv-raw-data', 'href'),
-        [Input('button-download-raw-data', 'n_clicks')],
-        [State('dropdown-material', 'value')],
+        [Input('button-download-raw-data', 'n_clicks'),
+        Input('dropdown-material', 'value')],
         )
 def download_csv(n_clicks_download_raw_data, material):
     github_raw_url = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/'
     csv_raw_file_url = github_raw_url + material + '.csv'
-    print(csv_raw_file_url)
     return csv_raw_file_url
+
 
 
 @app.callback(
