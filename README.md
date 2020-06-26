@@ -13,3 +13,21 @@ applications and thus to aid material selection. Relying on the ASTM D412 testin
 This Soft Robotics Materials Database is an Open Source database and made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
 
 [![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)](https://opendatacommons.org/licenses/odbl/)
+
+
+### Citing
+
+To cite the **Soft Robotics Materials Database** in your academic research, please use the following bibtex lines:
+
+```tex
+@article{Marechal2020,
+author = {Marechal, Luc and Balland, Pascale and Lindenroth, Lukas and Petrou, Fotis and Kontovounisios, Christos and Bello, Fernando},
+title = {Towards a Common Framework and Database of Materials for Soft Robotics},
+journal = {Soft Robotics},
+volume = {0},
+number = {0},
+pages = {null},
+year = {2020},
+doi = {10.1089/soro.2019.0115},
+}
+```
