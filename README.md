@@ -15,6 +15,11 @@ This Soft Robotics Materials Database is an Open Source database and made availa
 [![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)](https://opendatacommons.org/licenses/odbl/)
 
 
+### The Soft Robotics Database App
+
+In addition to visualising raw experimental data, the app allows you to fit a range of constitutive models and extract the respective model parameters for your own soft robotics applications in the **Constitutive Models** section. Detailed information on the test setup used to acquire the experimental data is provided within the app and on the respective [Wiki page](https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Setup-and-Characterisation). The **Materials Comparison** tab lets you to easily visualise and compare all tested materials to select the right silicone rubber for your soft robot projects.
+
+
 ### Citing
 
 To cite the **Soft Robotics Materials Database** in your academic research, please use the following bibtex lines:
