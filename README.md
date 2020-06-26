@@ -7,5 +7,8 @@ This repository aims to offer the mechanical characteristics of a wide range of 
 applications and thus to aid material selection. Relying on the ASTM D412 testing standards we followed a rigorous protocol to characterize elastomers through tensile testing.
 
 
-The source code is released under the Open Database License
+### License
+
+This Soft Robotics Materials Database is made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
+
 [![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)](https://opendatacommons.org/licenses/odbl/)
