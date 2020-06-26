@@ -6,7 +6,7 @@
 This repository aims to offer the mechanical characteristics of a wide range of elastomers for soft robotics
 applications and thus to aid material selection. Relying on the ASTM D412 testing standards we followed a rigorous protocol to characterize elastomers through tensile testing.
 
-[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://GitHub.com/LucMarechal/StrapDown.js/graphs/contributors/)
+[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://GitHub.com/LucMarechal/Soft-Robotics-Materials-Database/StrapDown.js/graphs/contributors/)
 
 ### License
 
