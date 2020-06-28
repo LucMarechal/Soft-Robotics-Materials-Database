@@ -9,7 +9,7 @@ applications and thus to aid material selection. Relying on the ASTM D412 testin
 **Authors:** This repository is maintained by [Luc Marechal (Associate Professor at USMB - SYMME)](linkedin.com/in/lucmarechal) and [Lukas Lindenroth (Research Fellow at UCL - WEISS)](linkedin.com/in/lukas-lindenroth-18770512a) <br />
 
 [![GitHub contributors](https://img.shields.io/github/contributors/LucMarechal/Soft-Robotics-Materials-Database)](https://github.com/LucMarechal/Soft-Robotics-Materials-Database/graphs/contributors)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/LucMarechal/Soft-Robotics-Materials-Database)]
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/LucMarechal/Soft-Robotics-Materials-Database)](https://img.shields.io/github/v/tag/LucMarechal/Soft-Robotics-Materials-Database)
 
 ### License
 
