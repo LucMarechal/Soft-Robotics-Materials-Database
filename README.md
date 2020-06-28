@@ -11,12 +11,12 @@ applications and thus to aid material selection. Relying on the ASTM D412 testin
 [![GitHub contributors](https://img.shields.io/github/contributors/LucMarechal/Soft-Robotics-Materials-Database)](https://github.com/LucMarechal/Soft-Robotics-Materials-Database/graphs/contributors)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/LucMarechal/Soft-Robotics-Materials-Database)](https://img.shields.io/github/v/tag/LucMarechal/Soft-Robotics-Materials-Database)
 [![GitHub repo size](https://img.shields.io/github/repo-size/LucMarechal/Soft-Robotics-Materials-Database)](https://img.shields.io/github/repo-size/LucMarechal/Soft-Robotics-Materials-Database)
+[![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)](https://opendatacommons.org/licenses/odbl/)
 
 ### License
 
 This Soft Robotics Materials Database is an Open Source database and made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
 
-[![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)](https://opendatacommons.org/licenses/odbl/)
 
 
 ### The Soft Robotics Database App
