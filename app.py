@@ -291,7 +291,7 @@ app_constitutive_models_layout = html.Div(children=[
             allowCross=False
         ),
 
-        html.Div(id='output-container-range-slider', style={'margin-bottom': '15px'}),
+        html.Div(id='output-container-range-slider', style={'margin-bottom': '15px', 'margin-top': '-1em'}),
 
         html.Div("The data is fitted on the selected strain range. Adjust the range accordingly to your application before clicking on the 'Fit data' button to obtain a better accuracy of the model."),
         
@@ -320,8 +320,9 @@ dbc.Row([
     dbc.Col([
         html.Img(src=app.get_asset_url('logo_soroDB.svg'), style={'width': '30%', 'display': 'inline-block'}), 
         html.Div(nb_materials_in_db, className="w3-badge w3-xlarge w3-sorored w3-padding", style={'display': 'inline-block'}),
-        html.Div("materials in the Database", style={'margin-bottom': '100px'}),
-        html.Div("Double click on legend to isolate one trace. Show or hide trace by click on the materials name.", style={'margin-bottom': '50px'}),
+        html.Div("materials in the Database", style={'margin-bottom': '50px'}),
+        
+        html.Div("Double click on legend to isolate one trace. Show or hide trace by click on the materials name.", style={'margin-bottom': '30px'}),
                 
         dbc.Row([
             daq.BooleanSwitch(
@@ -335,6 +336,9 @@ dbc.Row([
             html.Label('Data type: True/Engineering'),
         ]),
 
+        
+        dbc.Row([
+        dbc.Col([
         html.Label('Constitutive model'),
         dcc.Dropdown(
             id='dropdown-my-constitutive-model',
@@ -342,31 +346,51 @@ dbc.Row([
             value=models[0],  # Default value
             style={'width': '100%', 'marginBottom': '1em'}
         ),
+        ]),
         
-        html.Label('Order'),
+        dbc.Col([
+        html.Label('Order'),    
         dcc.Dropdown(
             id='dropdown-my-order-model',
             options=[{'label': i, 'value': i} for i in range(1,4)],   # dynamically fill in the dropdown menu
             value=3,  # Default value
             style={'width': '50%', 'marginBottom': '1em'}
         ),
+        ]),
+        ]),
+
+        dcc.RangeSlider(
+            id='my-range-slider',
+            min=0,
+            max=2,
+            step=0.01,
+            value=[0,2],
+            allowCross=False
+        ),
+
+        html.Div(id='output-container-my-range-slider', style={'margin-bottom': '1em', 'margin-top': '-1.5em'}),
+
+        html.Label('Enter your model parameters: ', style={'margin-bottom': '-1em'}),
 
         dash_table.DataTable(
             id='my-table-param',
             columns=[],
             data=[],
             editable=True,
+            style_table={'padding': '15px'}
             ),
 
-        html.Button('Find material', id='button-find-material', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
+        dbc.Row([
+        html.Button('Find material', id='button-find-material', style={'marginTop': '1em', 'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
 
-        html.Div(id='output-test',children=[""]), 
+        html.Div(id='output-test',children=[""]),
+        ]),
                 
-        ], width=2),
+        ], width=3),
     
     dbc.Col([html.Div(id='text-loading-data',children=["Loading data..."], style={"color": sorored,"font-weight": 'bold', "text-align": 'center'}), 
     
-    dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube')], width={"size": 10}),
+    dcc.Loading(id="loading-graph", children=[dcc.Graph(id='materials-comparison-graph')], color=sorored,type='cube')], width={"size": 9}),
     ],no_gutters=True,style={'padding': '20px', 'marginBottom': '-1.5em'}),
 
 ]),
@@ -395,17 +419,52 @@ def update_my_table_param(my_constitutive_model, my_model_order, data_type):
 
 @app.callback(
         Output('output-test', 'children'),
-        [Input('button-find-material', 'n_clicks'),
-        Input('my-table-param', 'data')],
-        [State('dropdown-my-constitutive-model', 'value'),
+        [Input('button-find-material', 'n_clicks')],
+        [State('my-table-param', 'data'),
+        State('dropdown-my-constitutive-model', 'value'),
         State('dropdown-my-order-model', 'value'),
-        State('toggle-true-eng-data', 'on')],
+        State('toggle-true-eng-data', 'on'),
+        State('my-range-slider', 'value')],
         )
-def find_material_on_click_button(n_clicks_find_material, my_model_param, my_constitutive_model, my_model_order, data_type):
-    my_hyperelastic = Hyperelastic(my_constitutive_model, my_model_param, my_model_order, data_type)
+def find_material_on_click_button(n_clicks_find_material, my_model_param, my_constitutive_model, my_model_order, data_type_toggle,my_slider_range):
+    if data_type_toggle is True:
+        data_type = 'Engineering'
+    else:
+        data_type = 'True'
 
-    print(my_hyperelastic)
-    return 'ok'
+    # loop to test all materials raw data and find the closest
+    for i, material in enumerate(materials):
+        [exp_data,header] = read_csv_exp_data_files(material)
+
+        # compare data only on the selected range
+        idx_low= pd.Index(exp_data[data_type+' Strain']).get_loc(my_slider_range[0],method='nearest')   # Find the index of the nearest strain value selected with the slider
+        idx_high = pd.Index(exp_data[data_type+' Strain']).get_loc(my_slider_range[1],method='nearest') # Find the index of the nearest strain value selected with the slider
+        selected_exp_data = exp_data[idx_low:idx_high] # Trimm the data to the selected range
+
+        # get the parameters entered in the table
+        my_optim_parameters = pd.DataFrame.from_dict(my_model_param, dtype='float').to_numpy()
+
+
+        # THis is for Young Modulus option. NEED TO BE CODED
+        #strain_my_material = np.linspace(0, idx_high, 20) # replace 20 by length of exp_data
+        ####### 
+
+        my_hyperelastic = Hyperelastic('Ogden', np.array([0]), 3, data_type) # Take the Ogden model of order 3, as it is generraly the best one
+        my_material_stress = my_hyperelastic.ConsitutiveModel(my_optim_parameters, selected_exp_data[data_type+' Strain'].values)
+
+        stats = HyperelasticStats(my_material_stress, selected_exp_data[data_type+' Stress (MPa)'].values, 2)
+        mapd = stats.mapd()
+
+        # initialize best aic to the first tested model
+        if i == 0:
+            best_mapd = mapd
+                
+        if mapd <= best_mapd:
+            best_mapd = mapd
+            closest_model = material
+
+    print(closest_model)
+    return closest_model
 
 
 
@@ -415,7 +474,7 @@ def find_material_on_click_button(n_clicks_find_material, my_model_param, my_con
         Input('dropdown-material', 'value')],
         )
 def download_csv(n_clicks_download_raw_data, material):
-    github_raw_url = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/'
+    #github_raw_url = 'https://raw.githubusercontent.com/LucMarechal/Soft-Robotics-Materials-Database/master/Tensile-Tests-Data/'  #DELETE THIS LINE
     csv_raw_file_url = github_raw_url + material + '.csv'
     return csv_raw_file_url
 
@@ -500,7 +559,7 @@ def fit_data_on_click_button(n_clicks_fit_data, material, all_constitutive_model
                     table_param_data = df_model_param.to_dict('records')
                     table_param_column = [{"name": i, "id": i} for i in df_model_param.columns]
                     best_model = constitutive_model
-                    header_table_param = best_model + " parameters : " + '\n' + '(on ε ' + data_type + ' data range {})'.format([f"{num:.2f}" for num in slider_value])#slider_value)
+                    header_table_param = best_model + " parameters : " + '\n' + '(on ε ' + data_type + ' data range {})'.format([f"{num:.2f}" for num in slider_value])
                     aic_model = "AIC : " + np.array2string(aic.round(1))
 
     #update displayed formula
@@ -646,6 +705,14 @@ def update_graph_comparison(data_type_toggle):
 
     loading_text = " "
     return figure, loading_text
+
+
+@app.callback(
+    Output('output-container-my-range-slider', 'children'),
+    [Input('my-range-slider', 'value')])
+def update_my_slider_range_output(slider_value):
+    return 'Strain range: {}'.format([f"{num:.2f}" for num in slider_value])
+
 
 
 @app.callback(Output('page-content', 'children'),
