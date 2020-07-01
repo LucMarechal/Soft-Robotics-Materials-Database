@@ -26,7 +26,7 @@ In addition to visualising raw experimental data, the app allows you to fit a ra
 
 ### Citing
 
-To cite the **Soft Robotics Materials Database** in your academic research, please use the following bibtex lines:
+To cite the **Soft Robotics Materials Database** in your academic research, please use the following bibtex entry:
 
 ```tex
 @article{Marechal2020,
