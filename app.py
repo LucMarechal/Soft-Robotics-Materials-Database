@@ -152,6 +152,8 @@ app.layout = html.Div([
         #html.Div(className = "footer", children=[
         [html.A(html.Img(src=app.get_asset_url('logo_SYMME.svg'), width='42%'),href='https://www.univ-smb.fr/symme/en/', target='_blank'),
         html.A(html.Img(src=app.get_asset_url('logo_USMB.svg'), width='42%'),href='https://www.univ-smb.fr/en/',style={'padding': '15px'}, target='_blank'),
+        html.Img(src=app.get_asset_url('logo_Imperial.svg'), width='42%',style={'marginRight': '15px'}),
+        html.Img(src=app.get_asset_url('logo_UCL.svg'), width='40%'),
         ], align="center", width=2),
 
     ], justify="between"),   
@@ -362,7 +364,7 @@ dbc.Row([
         dcc.RangeSlider(
             id='my-range-slider',
             min=0,
-            max=2,
+            max=3,
             step=0.01,
             value=[0,2],
             allowCross=False
