@@ -14,7 +14,7 @@
    viewBox="0 0 338.66666 169.33333"
    version="1.1"
    id="svg8"
-   sodipodi:docname="Soft_Robotics_Materials_Database_USMB_SYMME.svg"
+   sodipodi:docname="Soft_Robotics_Materials_Database_Logo_univ.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    inkscape:export-filename="D:\Desktop\Soft_Robotics_Materials_Database_USMB_Logo.png"
    inkscape:export-xdpi="96"
@@ -964,10 +964,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="540.0598"
-     inkscape:cy="350.3277"
+     inkscape:cx="220.60901"
+     inkscape:cy="613.84191"
      inkscape:document-units="mm"
-     inkscape:current-layer="surface81829"
+     inkscape:current-layer="flowRoot851-3"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
@@ -1191,21 +1191,81 @@
        sodipodi:nodetypes="cccccc"
        inkscape:transform-center-x="0.42321696"
        inkscape:transform-center-y="0.12749138" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot851-6"
+    <g
+       aria-label="Materials Database"
+       transform="matrix(0.60355454,0,0,0.67030345,-5.5263952,-107.31917)"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.60355454,0,0,0.67030345,-5.5263952,-107.31917)"><flowRegion
-         id="flowRegion853-8"
-         style="fill:#000000;fill-opacity:1"><rect
-           id="rect855-8"
-           width="580.53467"
-           height="143.54268"
-           x="193.74725"
-           y="117.72095"
-           style="fill:#000000;fill-opacity:1" /></flowRegion><flowPara
-         id="flowPara857-1"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1">Materials Database</flowPara></flowRoot>    <path
+       id="flowRoot851-6">
+      <path
+         d="m 225.10805,155.52969 v -28 h -6.64 l -7.36,11.84 -7.36,-11.84 h -6.64 v 28 h 6.04 v -18.16 l 7.8,11.84 h 0.16 l 7.88,-11.96 v 18.28 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1156" />
+      <path
+         d="m 249.59555,155.52969 v -12.44 q 0,-4.36 -2.28,-6.8 -2.28,-2.44 -7.28,-2.44 -2.72,0 -4.64,0.48 -1.92,0.48 -3.68,1.24 l 1.52,4.64 q 1.48,-0.56 2.8,-0.84 1.36,-0.32 3.12,-0.32 2.28,0 3.44,1 1.16,1 1.16,2.92 v 0.36 q -1.16,-0.4 -2.4,-0.64 -1.2,-0.24 -2.84,-0.24 -1.92,0 -3.52,0.44 -1.56,0.4 -2.72,1.24 -1.12,0.84 -1.76,2.12 -0.64,1.28 -0.64,3.04 v 0.08 q 0,1.6 0.56,2.84 0.6,1.2 1.6,2.04 1,0.84 2.32,1.28 1.36,0.4 2.88,0.4 2.24,0 3.8,-0.72 1.56,-0.76 2.68,-2 v 2.32 z m -5.76,-7.56 q 0,1.68 -1.32,2.72 -1.28,1.04 -3.44,1.04 -1.48,0 -2.4,-0.68 -0.92,-0.68 -0.92,-1.92 v -0.08 q 0,-1.44 1.12,-2.2 1.12,-0.76 3.08,-0.76 1.12,0 2.08,0.24 1,0.2 1.8,0.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1158" />
+      <path
+         d="m 266.86742,154.64969 v -4.88 q -1.4,0.76 -3,0.76 -1.96,0 -1.96,-2.08 v -9.16 h 5.04 v -5.2 h -5.04 v -5.48 h -6.08 v 5.48 h -2.56 v 5.2 h 2.56 v 10.16 q 0,1.88 0.44,3.12 0.48,1.2 1.28,1.96 0.84,0.76 1.96,1.04 1.16,0.32 2.56,0.32 1.52,0 2.68,-0.36 1.16,-0.32 2.12,-0.88 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1160" />
+      <path
+         d="m 291.38992,145.40969 v -0.08 q 0,-2.28 -0.64,-4.36 -0.6,-2.12 -1.92,-3.72 -1.28,-1.64 -3.24,-2.6 -1.96,-0.96 -4.64,-0.96 -2.36,0 -4.32,0.88 -1.92,0.88 -3.32,2.4 -1.4,1.52 -2.2,3.56 -0.76,2.04 -0.76,4.32 v 0.08 q 0,2.48 0.84,4.52 0.84,2 2.32,3.48 1.52,1.48 3.56,2.28 2.08,0.8 4.48,0.8 2.92,0 5.08,-1.04 2.16,-1.08 3.68,-2.96 l -3.48,-3.08 q -1.28,1.16 -2.48,1.68 -1.2,0.52 -2.72,0.52 -2.04,0 -3.44,-1.04 -1.36,-1.08 -1.8,-3.16 h 14.92 q 0.04,-0.44 0.04,-0.76 0.04,-0.32 0.04,-0.76 z m -5.92,-2.28 h -9.16 q 0.36,-2.08 1.52,-3.32 1.2,-1.24 3.12,-1.24 1.92,0 3.08,1.28 1.16,1.24 1.44,3.28 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1162" />
+      <path
+         d="m 308.84117,140.04969 v -6.36 q -2.72,-0.12 -4.32,1.2 -1.6,1.32 -2.52,3.52 v -4.32 h -6.08 v 21.44 h 6.08 v -7.92 q 0,-3.88 1.72,-5.72 1.76,-1.84 4.8,-1.84 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1164" />
+      <path
+         d="m 319.15992,131.72969 v -5.4 h -6.4 v 5.4 z m -0.16,23.8 v -21.44 h -6.08 v 21.44 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1166" />
+      <path
+         d="m 343.1893,155.52969 v -12.44 q 0,-4.36 -2.28,-6.8 -2.28,-2.44 -7.28,-2.44 -2.72,0 -4.64,0.48 -1.92,0.48 -3.68,1.24 l 1.52,4.64 q 1.48,-0.56 2.8,-0.84 1.36,-0.32 3.12,-0.32 2.28,0 3.44,1 1.16,1 1.16,2.92 v 0.36 q -1.16,-0.4 -2.4,-0.64 -1.2,-0.24 -2.84,-0.24 -1.92,0 -3.52,0.44 -1.56,0.4 -2.72,1.24 -1.12,0.84 -1.76,2.12 -0.64,1.28 -0.64,3.04 v 0.08 q 0,1.6 0.56,2.84 0.6,1.2 1.6,2.04 1,0.84 2.32,1.28 1.36,0.4 2.88,0.4 2.24,0 3.8,-0.72 1.56,-0.76 2.68,-2 v 2.32 z m -5.76,-7.56 q 0,1.68 -1.32,2.72 -1.28,1.04 -3.44,1.04 -1.48,0 -2.4,-0.68 -0.92,-0.68 -0.92,-1.92 v -0.08 q 0,-1.44 1.12,-2.2 1.12,-0.76 3.08,-0.76 1.12,0 2.08,0.24 1,0.2 1.8,0.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1168" />
+      <path
+         d="m 354.78117,155.52969 v -29.2 h -6.08 v 29.2 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1170" />
+      <path
+         d="m 376.25055,149.00969 v -0.08 q 0,-1.48 -0.6,-2.52 -0.6,-1.04 -1.52,-1.76 -0.92,-0.72 -2.08,-1.2 -1.16,-0.52 -2.28,-0.88 -0.88,-0.28 -1.68,-0.56 -0.76,-0.28 -1.36,-0.56 -0.6,-0.32 -0.96,-0.64 -0.36,-0.36 -0.36,-0.8 v -0.08 q 0,-0.64 0.56,-1.04 0.56,-0.44 1.68,-0.44 1.16,0 2.68,0.56 1.52,0.52 3.12,1.44 l 2.32,-4.2 q -1.76,-1.16 -3.88,-1.8 -2.08,-0.68 -4.12,-0.68 -1.64,0 -3.08,0.44 -1.4,0.44 -2.48,1.32 -1.04,0.88 -1.68,2.16 -0.6,1.24 -0.6,2.88 v 0.08 q 0,1.56 0.56,2.64 0.6,1.08 1.52,1.84 0.92,0.72 2.04,1.2 1.16,0.44 2.28,0.76 0.88,0.28 1.68,0.52 0.8,0.24 1.4,0.52 0.64,0.24 1,0.6 0.36,0.36 0.36,0.84 v 0.08 q 0,0.72 -0.64,1.16 -0.6,0.44 -1.92,0.44 -1.52,0 -3.28,-0.64 -1.72,-0.64 -3.48,-1.92 l -2.6,4 q 2.16,1.68 4.52,2.48 2.4,0.76 4.68,0.76 1.72,0 3.2,-0.4 1.52,-0.44 2.64,-1.28 1.12,-0.84 1.72,-2.12 0.64,-1.32 0.64,-3.12 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1172" />
+      <path
+         d="m 419.07992,141.52969 v -0.08 q 0,-2.96 -1.08,-5.48 -1.08,-2.56 -3.08,-4.44 -1.96,-1.88 -4.72,-2.92 -2.72,-1.08 -6,-1.08 h -10.92 v 28 h 10.92 q 3.28,0 6,-1.08 2.76,-1.08 4.72,-2.96 2,-1.88 3.08,-4.44 1.08,-2.56 1.08,-5.52 z m -6.44,0.08 q 0,1.88 -0.64,3.4 -0.6,1.52 -1.72,2.64 -1.08,1.12 -2.64,1.72 -1.56,0.6 -3.44,0.6 h -4.76 v -16.88 h 4.76 q 1.88,0 3.44,0.64 1.56,0.6 2.64,1.72 1.12,1.12 1.72,2.68 0.64,1.56 0.64,3.4 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1174" />
+      <path
+         d="m 442.32992,155.52969 v -12.44 q 0,-4.36 -2.28,-6.8 -2.28,-2.44 -7.28,-2.44 -2.72,0 -4.64,0.48 -1.92,0.48 -3.68,1.24 l 1.52,4.64 q 1.48,-0.56 2.8,-0.84 1.36,-0.32 3.12,-0.32 2.28,0 3.44,1 1.16,1 1.16,2.92 v 0.36 q -1.16,-0.4 -2.4,-0.64 -1.2,-0.24 -2.84,-0.24 -1.92,0 -3.52,0.44 -1.56,0.4 -2.72,1.24 -1.12,0.84 -1.76,2.12 -0.64,1.28 -0.64,3.04 v 0.08 q 0,1.6 0.56,2.84 0.6,1.2 1.6,2.04 1,0.84 2.32,1.28 1.36,0.4 2.88,0.4 2.24,0 3.8,-0.72 1.56,-0.76 2.68,-2 v 2.32 z m -5.76,-7.56 q 0,1.68 -1.32,2.72 -1.28,1.04 -3.44,1.04 -1.48,0 -2.4,-0.68 -0.92,-0.68 -0.92,-1.92 v -0.08 q 0,-1.44 1.12,-2.2 1.12,-0.76 3.08,-0.76 1.12,0 2.08,0.24 1,0.2 1.8,0.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1176" />
+      <path
+         d="m 459.6018,154.64969 v -4.88 q -1.4,0.76 -3,0.76 -1.96,0 -1.96,-2.08 v -9.16 h 5.04 v -5.2 h -5.04 v -5.48 h -6.08 v 5.48 h -2.56 v 5.2 h 2.56 v 10.16 q 0,1.88 0.44,3.12 0.48,1.2 1.28,1.96 0.84,0.76 1.96,1.04 1.16,0.32 2.56,0.32 1.52,0 2.68,-0.36 1.16,-0.32 2.12,-0.88 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1178" />
+      <path
+         d="m 482.5643,155.52969 v -12.44 q 0,-4.36 -2.28,-6.8 -2.28,-2.44 -7.28,-2.44 -2.72,0 -4.64,0.48 -1.92,0.48 -3.68,1.24 l 1.52,4.64 q 1.48,-0.56 2.8,-0.84 1.36,-0.32 3.12,-0.32 2.28,0 3.44,1 1.16,1 1.16,2.92 v 0.36 q -1.16,-0.4 -2.4,-0.64 -1.2,-0.24 -2.84,-0.24 -1.92,0 -3.52,0.44 -1.56,0.4 -2.72,1.24 -1.12,0.84 -1.76,2.12 -0.64,1.28 -0.64,3.04 v 0.08 q 0,1.6 0.56,2.84 0.6,1.2 1.6,2.04 1,0.84 2.32,1.28 1.36,0.4 2.88,0.4 2.24,0 3.8,-0.72 1.56,-0.76 2.68,-2 v 2.32 z m -5.76,-7.56 q 0,1.68 -1.32,2.72 -1.28,1.04 -3.44,1.04 -1.48,0 -2.4,-0.68 -0.92,-0.68 -0.92,-1.92 v -0.08 q 0,-1.44 1.12,-2.2 1.12,-0.76 3.08,-0.76 1.12,0 2.08,0.24 1,0.2 1.8,0.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1180" />
+      <path
+         d="m 510.31617,144.84969 v -0.08 q 0,-2.68 -0.84,-4.72 -0.8,-2.08 -2.16,-3.48 -1.36,-1.44 -3.12,-2.16 -1.76,-0.72 -3.64,-0.72 -2.4,0 -4,1 -1.56,0.96 -2.68,2.48 v -10.84 h -6.08 v 29.2 h 6.08 v -2.8 q 1.08,1.28 2.64,2.24 1.6,0.96 4.04,0.96 1.92,0 3.68,-0.72 1.76,-0.72 3.08,-2.12 1.36,-1.44 2.16,-3.48 0.84,-2.08 0.84,-4.76 z m -6.08,0 q 0,1.36 -0.44,2.44 -0.4,1.08 -1.12,1.88 -0.72,0.76 -1.68,1.2 -0.92,0.4 -2,0.4 -1.08,0 -2.04,-0.4 -0.92,-0.44 -1.64,-1.2 -0.68,-0.8 -1.12,-1.88 -0.4,-1.12 -0.4,-2.44 v -0.08 q 0,-1.32 0.4,-2.4 0.44,-1.12 1.12,-1.88 0.72,-0.8 1.64,-1.2 0.96,-0.44 2.04,-0.44 1.08,0 2,0.44 0.96,0.4 1.68,1.2 0.72,0.76 1.12,1.88 0.44,1.08 0.44,2.4 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1182" />
+      <path
+         d="m 533.26742,155.52969 v -12.44 q 0,-4.36 -2.28,-6.8 -2.28,-2.44 -7.28,-2.44 -2.72,0 -4.64,0.48 -1.92,0.48 -3.68,1.24 l 1.52,4.64 q 1.48,-0.56 2.8,-0.84 1.36,-0.32 3.12,-0.32 2.28,0 3.44,1 1.16,1 1.16,2.92 v 0.36 q -1.16,-0.4 -2.4,-0.64 -1.2,-0.24 -2.84,-0.24 -1.92,0 -3.52,0.44 -1.56,0.4 -2.72,1.24 -1.12,0.84 -1.76,2.12 -0.64,1.28 -0.64,3.04 v 0.08 q 0,1.6 0.56,2.84 0.6,1.2 1.6,2.04 1,0.84 2.32,1.28 1.36,0.4 2.88,0.4 2.24,0 3.8,-0.72 1.56,-0.76 2.68,-2 v 2.32 z m -5.76,-7.56 q 0,1.68 -1.32,2.72 -1.28,1.04 -3.44,1.04 -1.48,0 -2.4,-0.68 -0.92,-0.68 -0.92,-1.92 v -0.08 q 0,-1.44 1.12,-2.2 1.12,-0.76 3.08,-0.76 1.12,0 2.08,0.24 1,0.2 1.8,0.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1184" />
+      <path
+         d="m 554.2193,149.00969 v -0.08 q 0,-1.48 -0.6,-2.52 -0.6,-1.04 -1.52,-1.76 -0.92,-0.72 -2.08,-1.2 -1.16,-0.52 -2.28,-0.88 -0.88,-0.28 -1.68,-0.56 -0.76,-0.28 -1.36,-0.56 -0.6,-0.32 -0.96,-0.64 -0.36,-0.36 -0.36,-0.8 v -0.08 q 0,-0.64 0.56,-1.04 0.56,-0.44 1.68,-0.44 1.16,0 2.68,0.56 1.52,0.52 3.12,1.44 l 2.32,-4.2 q -1.76,-1.16 -3.88,-1.8 -2.08,-0.68 -4.12,-0.68 -1.64,0 -3.08,0.44 -1.4,0.44 -2.48,1.32 -1.04,0.88 -1.68,2.16 -0.6,1.24 -0.6,2.88 v 0.08 q 0,1.56 0.56,2.64 0.6,1.08 1.52,1.84 0.92,0.72 2.04,1.2 1.16,0.44 2.28,0.76 0.88,0.28 1.68,0.52 0.8,0.24 1.4,0.52 0.64,0.24 1,0.6 0.36,0.36 0.36,0.84 v 0.08 q 0,0.72 -0.64,1.16 -0.6,0.44 -1.92,0.44 -1.52,0 -3.28,-0.64 -1.72,-0.64 -3.48,-1.92 l -2.6,4 q 2.16,1.68 4.52,2.48 2.4,0.76 4.68,0.76 1.72,0 3.2,-0.4 1.52,-0.44 2.64,-1.28 1.12,-0.84 1.72,-2.12 0.64,-1.32 0.64,-3.12 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1186" />
+      <path
+         d="m 578.57742,145.40969 v -0.08 q 0,-2.28 -0.64,-4.36 -0.6,-2.12 -1.92,-3.72 -1.28,-1.64 -3.24,-2.6 -1.96,-0.96 -4.64,-0.96 -2.36,0 -4.32,0.88 -1.92,0.88 -3.32,2.4 -1.4,1.52 -2.2,3.56 -0.76,2.04 -0.76,4.32 v 0.08 q 0,2.48 0.84,4.52 0.84,2 2.32,3.48 1.52,1.48 3.56,2.28 2.08,0.8 4.48,0.8 2.92,0 5.08,-1.04 2.16,-1.08 3.68,-2.96 l -3.48,-3.08 q -1.28,1.16 -2.48,1.68 -1.2,0.52 -2.72,0.52 -2.04,0 -3.44,-1.04 -1.36,-1.08 -1.8,-3.16 h 14.92 q 0.04,-0.44 0.04,-0.76 0.04,-0.32 0.04,-0.76 z m -5.92,-2.28 h -9.16 q 0.36,-2.08 1.52,-3.32 1.2,-1.24 3.12,-1.24 1.92,0 3.08,1.28 1.16,1.24 1.44,3.28 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Gotham;-inkscape-font-specification:'Gotham Bold';fill:#000000;fill-opacity:1"
+         id="path1188" />
+    </g>
+    <path
        style="fill:#cd3959;fill-opacity:1;stroke:#cd3959;stroke-width:0.29079166px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 73.871395,-10.565857 c -5.789842,3.6229829 -7.298745,3.6960675 -8.135291,2.0857733 -0.30558,-1.1697574 1.032229,-3.7347633 5.651114,-4.7867003 1.583542,-0.459315 4.635663,0.753221 2.484177,2.700927 z"
        id="path1151-8-7"
@@ -1217,21 +1277,57 @@
        id="path110-6-3-3-2-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot851-3"
+    <g
+       aria-label="oft Robotics"
+       transform="matrix(1.1149403,0,0,1.2317219,-107.21059,-217.72668)"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial Bold';letter-spacing:0px;word-spacing:0px;opacity:1;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       transform="matrix(1.1149403,0,0,1.2317219,-107.21059,-217.72668)"><flowRegion
-         id="flowRegion853-6"
-         style="vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"><rect
-           id="rect855-2"
-           width="580.53467"
-           height="143.54268"
-           x="193.74725"
-           y="117.72095"
-           style="vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" /></flowRegion><flowPara
-         id="flowPara857-12"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">oft Robotics</flowPara></flowRoot>    <g
+       id="flowRoot851-3">
+      <path
+         d="m 206.82805,156.04969 c 6.96,0 12,-5.16 12,-11.32 v -0.08 c 0,-6.16 -5,-11.24 -11.92,-11.24 -6.96,0 -12,5.16 -12,11.32 v 0.08 c 0,6.16 5,11.24 11.92,11.24 z m 0.08,-6.44 c -2.68,0 -4.6,-2.24 -4.6,-4.88 v -0.08 c 0,-2.6 1.76,-4.8 4.52,-4.8 2.68,0 4.6,2.24 4.6,4.88 v 0.08 c 0,2.6 -1.76,4.8 -4.52,4.8 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1133" />
+      <path
+         d="m 223.15911,155.52969 h 7.56 v -15.56 h 4.84 v -5.84 h -4.96 v -0.52 c 0,-1.4 0.76,-2.04 2.16,-2.04 1.08,0 1.96,0.16 2.84,0.44 v -5.36 c -1.2,-0.36 -2.64,-0.6 -4.96,-0.6 -2.56,0 -4.32,0.56 -5.64,1.88 -1.28,1.28 -1.84,3.12 -1.84,5.6 v 0.48 h -2.52 v 5.96 h 2.52 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1135" />
+      <path
+         d="m 246.56642,155.96969 c 2.12,0 3.92,-0.48 5.28,-1.24 v -5.96 c -0.92,0.44 -1.88,0.72 -2.88,0.72 -1.4,0 -2.08,-0.64 -2.08,-2.16 v -7.32 h 5.04 v -6.12 h -5.04 v -5.48 h -7.6 v 5.48 h -2.56 v 6.12 h 2.56 v 8.8 c 0,5.16 2.72,7.16 7.28,7.16 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1137" />
+      <path
+         d="m 266.75666,155.52969 h 7.76 v -8.48 h 3.32 0.08 l 5.64,8.48 h 8.96 l -6.68,-9.76 c 3.48,-1.48 5.76,-4.32 5.76,-8.6 v -0.08 c 0,-2.76 -0.84,-4.92 -2.48,-6.52 -1.88,-1.92 -4.84,-3.04 -9.12,-3.04 h -13.24 z m 7.76,-14.56 v -6.72 h 5.08 c 2.6,0 4.2,1.12 4.2,3.32 v 0.08 c 0,2.04 -1.52,3.32 -4.16,3.32 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1139" />
+      <path
+         d="m 305.71148,156.04969 c 6.96,0 12,-5.16 12,-11.32 v -0.08 c 0,-6.16 -5,-11.24 -11.92,-11.24 -6.96,0 -12,5.16 -12,11.32 v 0.08 c 0,6.16 5,11.24 11.92,11.24 z m 0.08,-6.44 c -2.68,0 -4.6,-2.24 -4.6,-4.88 v -0.08 c 0,-2.6 1.76,-4.8 4.52,-4.8 2.68,0 4.6,2.24 4.6,4.88 v 0.08 c 0,2.6 -1.76,4.8 -4.52,4.8 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1141" />
+      <path
+         d="m 335.11691,156.00969 c 5.12,0 9.56,-4.28 9.56,-11.32 v -0.08 c 0,-6.92 -4.44,-11.2 -9.6,-11.2 -3.24,0 -5.08,1.56 -6.56,3.36 v -10.44 h -7.6 v 29.2 h 7.6 v -2.64 c 1.4,1.64 3.32,3.12 6.6,3.12 z m -2.36,-6.36 c -2.44,0 -4.4,-2.04 -4.4,-4.92 v -0.08 c 0,-2.84 1.96,-4.88 4.4,-4.88 2.48,0 4.44,2.04 4.44,4.88 v 0.08 c 0,2.92 -1.96,4.92 -4.44,4.92 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1143" />
+      <path
+         d="m 358.98359,156.04969 c 6.96,0 12,-5.16 12,-11.32 v -0.08 c 0,-6.16 -5,-11.24 -11.92,-11.24 -6.96,0 -12,5.16 -12,11.32 v 0.08 c 0,6.16 5,11.24 11.92,11.24 z m 0.08,-6.44 c -2.68,0 -4.6,-2.24 -4.6,-4.88 v -0.08 c 0,-2.6 1.76,-4.8 4.52,-4.8 2.68,0 4.6,2.24 4.6,4.88 v 0.08 c 0,2.6 -1.76,4.8 -4.52,4.8 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1145" />
+      <path
+         d="m 382.55466,155.96969 c 2.12,0 3.92,-0.48 5.28,-1.24 v -5.96 c -0.92,0.44 -1.88,0.72 -2.88,0.72 -1.4,0 -2.08,-0.64 -2.08,-2.16 v -7.32 h 5.04 v -6.12 h -5.04 v -5.48 h -7.6 v 5.48 h -2.56 v 6.12 h 2.56 v 8.8 c 0,5.16 2.72,7.16 7.28,7.16 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1147" />
+      <path
+         d="m 391.21572,131.92969 h 7.92 v -5.6 h -7.92 z m 0.16,23.6 h 7.6 v -21.64 h -7.6 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1149" />
+      <path
+         d="m 413.68241,156.04969 c 4.76,0 7.64,-2 9.64,-4.96 l -5.08,-3.68 c -1.2,1.4 -2.36,2.24 -4.16,2.24 -2.56,0 -4.32,-2.12 -4.32,-4.92 v -0.08 c 0,-2.64 1.8,-4.8 4.24,-4.8 1.84,0 3,0.84 4.04,2.28 l 5.16,-3.84 c -1.84,-2.92 -4.8,-4.84 -9.24,-4.84 -6.84,0 -11.6,5.16 -11.6,11.28 v 0.08 c 0,6.12 4.8,11.24 11.32,11.24 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1151" />
+      <path
+         d="m 434.57222,156.00969 c 5.28,0 8.84,-2.48 8.84,-7.24 v -0.08 c 0,-4.2 -3.4,-5.68 -7.68,-6.88 -2.28,-0.68 -3.52,-1.08 -3.52,-1.92 v -0.08 c 0,-0.6 0.6,-1.04 1.76,-1.04 1.72,0 4.16,0.76 6.4,2 l 2.6,-4.8 c -2.48,-1.6 -5.76,-2.52 -8.92,-2.52 -5,0 -8.68,2.56 -8.68,7.16 v 0.08 c 0,4.36 3.4,5.8 7.68,6.92 2.28,0.64 3.48,1 3.48,1.84 v 0.08 c 0,0.76 -0.6,1.16 -1.92,1.16 -2.24,0 -4.96,-0.84 -7.44,-2.48 l -2.84,4.6 c 3,2.16 6.6,3.2 10.24,3.2 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Gotham Black';-inkscape-font-specification:'Gotham Black, Bold';letter-spacing:-0.00456444px;vector-effect:none;fill:#cd3959;fill-opacity:1;stroke:none;stroke-width:0.47296318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1153" />
+    </g>
+    <g
        id="surface81829"
        transform="matrix(0.0186541,0,0,0.0186541,92.832312,42.685504)">
       <path
