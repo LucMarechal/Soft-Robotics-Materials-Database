@@ -75,7 +75,7 @@ class Hyperelastic:
             if self.data_type == 'True':
                 Stress[i,:] = 2*(lambd**2 - 1/lambd)*(i+1)*cVec[i]*((I1-3)**(i)) # true
             elif self.data_type == 'Engineering':
-                Stress[i,:] = (2*(lambd - 1/(lambd**2))*(i+1)*cVec[i]*(I1-3)**(i))/lambd # eng
+                Stress[i,:] = 2*(lambd - 1/(lambd**2))*(i+1)*cVec[i]*(I1-3)**(i) # eng
             else:
                 print("Data type error. Data is neither 'True' or 'Engineering'. ")
 
@@ -167,7 +167,7 @@ class Hyperelastic:
         if self.data_type == 'True':
             Stress = (lambd**2 - 1/lambd)*(mu*Jm / (Jm - I1 + 3))
         elif self.data_type == 'Engineering':
-            Stress = ((lambd**2 - 1/lambd)*(mu*Jm / (Jm - I1 + 3)))/lambd
+            Stress = (lambd - 1/lambd**2)*(mu*Jm / (Jm - I1 + 3))
 
         return Stress
  
@@ -214,7 +214,7 @@ class Hyperelastic:
         if self.data_type == 'True':
             Stress = 2*(lambd**2 - 1/lambd) * C1*C2*(np.exp(C2*(I1-3)))
         elif self.data_type == 'Engineering':
-            Stress = (2*(lambd**2 - 1/lambd) * C1*C2*(np.exp(C2*(I1-3))))/lambd
+            Stress = 2*(lambd - 1/lambd**2) * C1*C2*(np.exp(C2*(I1-3)))
 
         return Stress        
     
