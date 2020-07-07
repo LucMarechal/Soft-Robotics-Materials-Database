@@ -58,8 +58,7 @@ class Hyperelastic:
 
 
     def YeohModel(self, cVec, Strain):
-        """Yeoh hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""
+        """Yeoh hyperelastic model (incompressible material under uniaxial tension)"""
     
         if self.data_type == 'True':
             lambd = np.exp(Strain)
@@ -86,8 +85,7 @@ class Hyperelastic:
 
 
     def NeoHookeanModel(self, mu, Strain):
-        """Neo-Hookean hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""
+        """Neo-Hookean hyperelastic model (incompressible material under uniaxial tension)"""
 
         if self.data_type == 'True':
             lambd = np.exp(Strain)       # lambd i.e lambda
@@ -103,8 +101,7 @@ class Hyperelastic:
 
 
     def OgdenModel(self, parameters, Strain):
-        """Ogden hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""
+        """Ogden hyperelastic model (incompressible material under uniaxial tension)"""
                 
         # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan] 
         muVec = parameters.reshape(2, self.order)[0]
@@ -132,8 +129,7 @@ class Hyperelastic:
 
 
     def MooneyRivlinModel(self, cVec, Strain):
-        """Mooney Rivlin hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""
+        """Mooney Rivlin hyperelastic model (incompressible material under uniaxial tension)"""
         
         cVec = np.append(cVec, np.zeros(3-self.order) ) #To ensure CXX is zero if unsed
         C10 = cVec[0]
@@ -154,8 +150,7 @@ class Hyperelastic:
 
 
     def GentModel(self, parameters, Strain):
-        """Gent hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""
+        """Gent hyperelastic model (incompressible material under uniaxial tension)"""
        
         mu = parameters[0]
         Jm = parameters[1]
@@ -179,8 +174,7 @@ class Hyperelastic:
     
     
     def VerondaWestmannModel(self, parameters, Strain):
-        """Veronda-Westmann hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""    
+        """Veronda-Westmann hyperelastic model (incompressible material under uniaxial tension)"""  
         
         C1=parameters[0]
         C2=parameters[1]
@@ -203,8 +197,7 @@ class Hyperelastic:
    
  
     def HumphreyModel(self, parameters, Strain):
-        """Humphrey hyperelastic model (incompressible material under uniaxial tension)
-        Uses true strain and true stress data"""    
+        """Humphrey hyperelastic model (incompressible material under uniaxial tension)"""   
         
         C1=parameters[0]
         C2=parameters[1]
