@@ -21,7 +21,9 @@ This Soft Robotics Materials Database is an Open Source database made available 
 
 ### The Soft Robotics Database App
 
-<a href="https://soro-materials-database.herokuapp.com/"><img width=80" height="80" src="assets/SoRoDB_App_icon.svg"></a>
+<p align="center">
+  <a href="https://soro-materials-database.herokuapp.com/"><img width=80" height="80" src="assets/SoRoDB_App_icon.svg"></a>
+</p>
 
 In addition to visualising raw experimental data, the app allows you to fit a range of constitutive models and extract the respective model parameters for your own soft robotics applications in the **Constitutive Models** section. 
 
