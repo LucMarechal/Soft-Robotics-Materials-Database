@@ -13,14 +13,7 @@ applications and thus to aid material selection. Relying on the ASTM D412 testin
 [![GitHub repo size](https://img.shields.io/github/repo-size/LucMarechal/Soft-Robotics-Materials-Database)](https://img.shields.io/github/repo-size/LucMarechal/Soft-Robotics-Materials-Database)
 [![License: ODbL](https://img.shields.io/badge/License-ODbL-brightgreen.svg)](https://opendatacommons.org/licenses/odbl/)
 
-### License
-
-This Soft Robotics Materials Database is an Open Source database made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
-
-
-
 ### The Soft Robotics Database App
-
 <p align="center">
   <a href="https://soro-materials-database.herokuapp.com/"><img src="assets/icon_SoRoDB_App.svg"></a>
 </p>
@@ -28,6 +21,15 @@ This Soft Robotics Materials Database is an Open Source database made available 
 In addition to visualising raw experimental data, the app allows you to fit a range of constitutive models and extract the respective model parameters for your own soft robotics applications in the **Constitutive Models** section. 
 
 How to use the App ? :point_right: https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Soft-Robotics-Materials-Database-App
+
+
+### Wiki
+https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki
+
+
+### License
+
+This Soft Robotics Materials Database is an Open Source database made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
 
 
 ### Citing
