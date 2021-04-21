@@ -18,6 +18,10 @@ applications and thus to aid material selection. Relying on the ASTM D412 testin
   <a href="https://soro-materials-database.herokuapp.com/"><img src="assets/icon_SoRoDB_App.svg"></a>
 </p>
 
+
+https://user-images.githubusercontent.com/36209435/115527428-55e59900-a291-11eb-8298-0886f42c2df9.mp4
+
+
 In addition to visualising raw experimental data, the app allows you to fit a range of constitutive models and extract the respective model parameters for your own soft robotics applications in the **Constitutive Models** section. 
 
 How to use the App ? :point_right: https://github.com/LucMarechal/Soft-Robotics-Materials-Database/wiki/Soft-Robotics-Materials-Database-App
