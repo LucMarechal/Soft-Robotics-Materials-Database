@@ -71,7 +71,7 @@ smmap==3.0.1
 soupsieve==1.9.4
 sqlparse==0.3.1
 typed-ast==1.4.0
-urllib3==1.25.8
+urllib3==1.26.5
 virtualenv==20.0.18
 virtualenv-clone==0.5.4
 Werkzeug==1.0.1
