@@ -89,10 +89,10 @@ class Hyperelastic:
 
         if self.data_type == 'True':
             lambd = np.exp(Strain)       # lambd i.e lambda
-            Stress = 2*mu*(lambd**2 - 1/lambd)
+            Stress = mu*(lambd**2 - 1/lambd)
         elif self.data_type == 'Engineering':
             lambd = 1 + Strain
-            Stress = 2*mu*(lambd - 1/(lambd**2))
+            Stress = mu*(lambd - 1/(lambd**2))
         else:
             print("Data type error. Data is neither 'True' or 'Engineering'. ")
 
