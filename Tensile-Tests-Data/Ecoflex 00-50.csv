@@ -16,7 +16,7 @@ Material supplier;Smooth-On;https://www.smooth-on.com/products/ecoflex-00-50/;;
 Material;EcoFlex50;;;
 ;;;;
 Time (s);True Strain;True Stress (MPa);Engineering Strain;Engineering Stress (MPa)
-0.2;0.04364;-0.00098670068;0.044605;-0.00094
+0.2;0.04364;0.00098670068;0.044605;-0.00094
 0.3;0.06574;0.002388602235;0.06795;0.00224
 0.4;0.08695;0.004842184975;0.09084;0.004435
 0.5;0.107615;0.00635907996;0.113615;0.005715
