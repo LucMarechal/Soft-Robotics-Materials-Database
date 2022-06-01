@@ -38,6 +38,8 @@ This Soft Robotics Materials Database is an Open Source database made available 
 
 ### Citing
 
+https://www.liebertpub.com/doi/pdf/10.1089/soro.2019.0115
+
 To cite the **Soft Robotics Materials Database** in your academic research, please use the following bibtex entry:
 
 ```tex
