@@ -15,7 +15,7 @@ applications and thus to aid material selection. Relying on the ASTM D412 testin
 
 ### The Soft Robotics Database App
 <p align="center">
-  <a href="https://soro-materials-database.herokuapp.com/"><img src="assets/icon_SoRoDB_App.svg"></a>
+  <a href="https://soro-materials-database.onrender.com"><img src="assets/icon_SoRoDB_App.svg"></a>
 </p>
 
 
