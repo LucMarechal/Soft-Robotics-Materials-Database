@@ -14,46 +14,53 @@ class Hyperelastic:
         self.order = order
         self.parameters = parameters
         self.param_names = []
-        self.data_type = data_type
+        self.data_type = data_type        
+        self.fitting_method = 'lm'
 
         if model == 'Ogden':
-            initialGuessMu = np.array([0.1]*self.order)
-            initialGuessAlpha = np.array([0.2]*self.order)
+            initialGuessMu = np.array([1.0]*self.order)
+            initialGuessAlpha = np.array([1.0]*self.order)
             self.initialGuessParam = np.append(initialGuessMu,initialGuessAlpha)
             self.nbparam = self.order*2
             muVec_names = ["µ1","µ2","µ3"][0:self.order]
             alphaVec_names = ["α1","α2","α3"][0:self.order]
             self.param_names = np.append(muVec_names,alphaVec_names)
+            self.fitting_method = 'trust-constr'
         elif model == 'Neo Hookean':
             self.initialGuessParam = np.array([0.1])
             self.nbparam = 1            
             self.param_names = ["µ"]
+            self.fitting_method = 'lm'
         elif model == 'Yeoh':
             self.initialGuessParam = np.array([0.1]*self.order)
             self.nbparam = self.order
-            self.param_names = ["C1","C2","C3"][0:self.order] 
+            self.param_names = ["C1","C2","C3"][0:self.order]
+            self.fitting_method = 'lm'
         elif model == 'Mooney Rivlin':
             self.initialGuessParam = np.array([0.1]*self.order)
             self.nbparam = self.order
             self.param_names = ["C10","C01","C20"][0:self.order]
+            self.fitting_method = 'trust-constr'
         elif model == 'Gent':
             self.initialGuessParam = np.array([0.1]*2)
             self.nbparam = 2
             self.order=2
             self.param_names = ["µ","Jm"]
+            self.fitting_method = 'lm'
         elif model == 'Veronda Westmann':
             self.initialGuessParam = np.array([0.1]*2)
             self.nbparam = 2
             self.order=2
-            self.param_names = ["C1","C2"] 
+            self.param_names = ["C1","C2"]
+            self.fitting_method = 'lm'
         elif model == 'Humphrey':
             self.initialGuessParam = np.array([0.1]*2)
             self.nbparam = 2
             self.order=2
-            self.param_names = ["C1","C2"]            
+            self.param_names = ["C1","C2"]
+            self.fitting_method = 'lm'
         else:
             print("Error")
-
 
 
 
@@ -104,8 +111,8 @@ class Hyperelastic:
         """Ogden hyperelastic model (incompressible material under uniaxial tension)"""
                 
         # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan] 
-        muVec = parameters.reshape(2, self.order)[0]
-        alphaVec = parameters.reshape(2, self.order)[1]
+        muVec = parameters[0:self.order]
+        alphaVec = parameters[self.order:]
         
         if self.data_type == 'True':
             lambd = np.exp(Strain)       # lambd i.e lambda
@@ -120,9 +127,9 @@ class Hyperelastic:
         alphaVec = alphaVec[:self.order, np.newaxis]
 
         if self.data_type == 'True':
-            Stress = np.sum(2*muVec*(lambd**(alphaVec - 1) - lambd**(-((1/2)*alphaVec + 1))), axis=0)
+            Stress = np.sum(muVec*(lambd**alphaVec - 1/(lambd**(alphaVec/2))), axis=0)
         elif self.data_type == 'Engineering':
-            Stress = np.sum((2*muVec*(lambd**(alphaVec - 1) - lambd**(-((1/2)*alphaVec + 1)))/lambd), axis=0)        
+            Stress = np.sum((muVec*(lambd**alphaVec - 1/(lambd**(alphaVec/2)))/lambd), axis=0)
 
         return Stress
 
@@ -242,3 +249,47 @@ class Hyperelastic:
             print("Error")
             
         return Stress
+
+
+
+    def NonlinearConstraintFunction(self, parameters):
+        """ Constraints function for 'trust-constr' optimisation algorithm"""      
+        # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]
+        self.parameters = parameters # update parameters attribute      
+        
+        if self.model == 'Ogden':
+            if self.order == 3:
+                constraints_function = [self.parameters[0]*self.parameters[3], self.parameters[1]*self.parameters[4], self.parameters[2]*self.parameters[5]]
+            elif self.order == 2:
+                constraints_function = [self.parameters[0]*self.parameters[2], self.parameters[1]*self.parameters[3]]
+            elif self.order == 1:
+                constraints_function = [self.parameters[0]*self.parameters[1]]
+            else:
+                print("Error in OGDEN Hyperelastic.ConstraintsFunction")
+        else:
+            constraints_function = []
+            print("Error in Hyperelastic.ConstraintsFunction")
+           
+        return constraints_function
+
+
+
+    def NonlinearConstraintJacobian(self, parameters):
+        """ Constraints function for 'trust-constr' optimisation algorithm"""      
+        # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]
+        self.parameters = parameters # update parameters attribute      
+        
+        if self.model == 'Ogden':
+            if self.order == 3:
+                constraints_jacobian = [[parameters[3], 0, 0, parameters[0], 0, 0], [0, parameters[4], 0, 0, parameters[1], 0], [0, 0, parameters[5], 0, 0, parameters[2]]]
+            elif self.order == 2:
+                constraints_jacobian = [[parameters[2], 0, parameters[0], 0], [0, parameters[3], 0, parameters[1]]]
+            elif self.order == 1:
+                constraints_jacobian = [parameters[1], parameters[0]]
+            else:
+                print("Error in OGDEN Hyperelastic.ConstraintsFunction")
+        else:
+            constraints_jacobian = []
+            print("Error in Hyperelastic.ConstraintsFunction")
+           
+        return constraints_jacobian
