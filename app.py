@@ -3,10 +3,11 @@ __author__ = "Luc Marechal"
 __copyright__ = ""
 __credits__ = ["Luc Marechal", "Lukas Lindenroth"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 __maintainer__ = "Luc Marechal"
 __email__ = "luc.marechal(at)univ-smb(dot)fr"
 __status__ = "Prod1"
+
 
 # Resources and documentation
 # Beautifulsoup : https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3
@@ -29,6 +30,9 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 # Opimization
 from scipy.optimize import least_squares
+from scipy.optimize import NonlinearConstraint
+from scipy.optimize import LinearConstraint
+from scipy.optimize import minimize
 import numpy as np
 from Hyperelastic import Hyperelastic
 from HyperelasticStats import HyperelasticStats
@@ -51,7 +55,6 @@ external_stylesheets = ['SoRo_Material_Database.css', dbc.themes.GRID,] #dbc.the
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
-server = app.server
 app.title = "Soft Robotics Materials Database"
 
 
@@ -84,20 +87,49 @@ def read_csv_exp_data_files(material_name):
 #  OPTIMIZATION
 #############################################################################
 # cost function to calculate the residuals. The fitting function holds the parameter values.  
-def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):  
+def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):
     theo_stress = hyperelastic.ConsitutiveModel(parameters, exp_strain)   
-    residuals = theo_stress - exp_stress 
+
+    if hyperelastic.fitting_method == 'lm':
+        residuals = theo_stress - exp_stress
+    elif hyperelastic.fitting_method == 'trust-constr':
+        residuals = np.sqrt(sum((theo_stress-exp_stress)**2.0))  # absolute           
+    else:
+        print("Error, please chose either 'lm' or 'trust-constr' as fitting method")
+    
     return residuals
+
 
 def optimization(model, order, dataframe, data_type):
     # Hyperelastic object
     hyperelastic = Hyperelastic(model, np.array([0]), order, data_type)
     
+    # Get experimental data
     exp_strain = dataframe[data_type+' Strain'].values
     exp_stress = dataframe[data_type+' Stress (MPa)'].values
-    # The least_squares package calls the Levenberg-Marquandt algorithm.
-    # best-fit paramters are kept within optim_result.x
-    optim_result = least_squares(objectiveFun_Callback, hyperelastic.initialGuessParam, method ='lm', args=(exp_strain, exp_stress, hyperelastic))
+    
+
+    if hyperelastic.fitting_method == 'trust-constr':   
+        if hyperelastic.model == 'Ogden':
+            # Non Linear Conditions for the Ogden model : mu0*alpha0 > 0, mu1*alpha1 > 0, mu2*alpha2 > 0
+            const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian)#, hess='2-point')
+        elif hyperelastic.model == 'Mooney Rivlin':
+            # Linear Conditions for the Mooney Rivlin model : C10 + C01 > 0
+            const = LinearConstraint([[1.0, 1.0, 0.0][0:hyperelastic.order], [0.0, 0.0, 0.0][0:hyperelastic.order]], 0.0, np.inf)
+        else:
+            const=()
+
+        # The ogden and Mooney Rivlin models need constraint optimisation which cannot be done with the Levenberg-Marquandt algorithm
+        optim_result = minimize(objectiveFun_Callback, hyperelastic.initialGuessParam, args=(exp_strain, exp_stress, hyperelastic), method='trust-constr', constraints=const, tol=1e-12)
+    
+    elif hyperelastic.fitting_method == 'lm':
+        # The least_squares package calls the Levenberg-Marquandt algorithm.
+        # best-fit paramters are kept within optim_result.x
+        optim_result = least_squares(objectiveFun_Callback, hyperelastic.initialGuessParam, method ='lm', gtol=1e-12, args=(exp_strain, exp_stress, hyperelastic))   
+
+    else:
+        print("Error in fitting method")
+
     optim_parameters = optim_result.x
 
     df_model_param = pd.DataFrame(optim_parameters, index=hyperelastic.param_names, columns=[model]).transpose()
