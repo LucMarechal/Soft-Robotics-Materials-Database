@@ -8,9 +8,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="158.61458pt"
-   height="25.218189pt"
-   viewBox="0 0 158.61458 25.218189"
+   width="124.47003pt"
+   height="26.09926pt"
+   viewBox="0 0 124.47003 26.09926"
    version="1.2"
    id="svg4431"
    sodipodi:docname="Ogden_True.svg"
@@ -36,14 +36,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
+     inkscape:window-width="1850"
+     inkscape:window-height="1057"
      id="namedview4433"
      showgrid="false"
-     inkscape:zoom="10.113769"
-     inkscape:cx="29.199297"
-     inkscape:cy="18.370846"
-     inkscape:window-x="-8"
+     inkscape:zoom="3.5757573"
+     inkscape:cx="115.15078"
+     inkscape:cy="48.473939"
+     inkscape:window-x="62"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="surface9338"
@@ -1579,13 +1579,13 @@
   </defs>
   <g
      id="surface9338"
-     transform="translate(-312.18317,-547.64505)">
+     transform="translate(-312.4524,-546.70448)">
     <g
        transform="translate(-13.463697,135.40969)"
        style="fill:#000000;fill-opacity:1"
        id="g3812-5" />
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-108.0772,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-103.9967,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3816-6">
       <use
@@ -1597,7 +1597,7 @@
          id="use3814-0" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-105.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3820-0">
       <use
@@ -1609,7 +1609,7 @@
          id="use3818-0" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-105.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3824-8">
       <use
@@ -1621,7 +1621,7 @@
          id="use3822-2" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-105.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3828-0">
       <use
@@ -1633,7 +1633,7 @@
          id="use3826-3" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-105.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3834-4">
       <use
@@ -1652,19 +1652,7 @@
          id="use3832-8" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
-       style="fill:#000000;fill-opacity:1"
-       id="g3838-6">
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph4-7"
-         x="379.28"
-         y="428.466"
-         id="use3836-3" />
-    </g>
-    <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-111.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3842-7">
       <use
@@ -1676,7 +1664,7 @@
          id="use3840-2" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-111.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3846-6">
       <use
@@ -1688,7 +1676,7 @@
          id="use3844-4" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-111.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3850-2">
       <use
@@ -1700,7 +1688,7 @@
          id="use3848-0" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-111.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3854-7">
       <use
@@ -1712,19 +1700,7 @@
          id="use3852-5" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
-       style="fill:#000000;fill-opacity:1"
-       id="g3858-1">
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-6"
-         x="403.297"
-         y="425.64301"
-         id="use3856-4" />
-    </g>
-    <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-114.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3862-9">
       <use
@@ -1736,7 +1712,7 @@
          id="use3860-6" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-114.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3866-5">
       <use
@@ -1748,38 +1724,7 @@
          id="use3864-2" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
-       style="fill:#000000;fill-opacity:1"
-       id="g3870-9">
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph9-1"
-         x="415.16699"
-         y="425.64301"
-         id="use3868-6" />
-    </g>
-    <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
-       style="fill:#000000;fill-opacity:1"
-       id="g3876-7">
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-1"
-         x="420.92401"
-         y="425.64301"
-         id="use3872-6" />
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-7"
-         x="424.5769"
-         y="425.64301"
-         id="use3874-5" />
-    </g>
-    <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-129.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3880-2">
       <use
@@ -1791,7 +1736,7 @@
          id="use3878-6" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-129.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3884-1">
       <use
@@ -1803,7 +1748,7 @@
          id="use3882-5" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-129.94697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3888-3">
       <use
@@ -1815,19 +1760,7 @@
          id="use3886-5" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
-       style="fill:#000000;fill-opacity:1"
-       id="g3892-4">
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-6"
-         x="448.99899"
-         y="425.04199"
-         id="use3890-3" />
-    </g>
-    <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-134.44697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3896-2">
       <use
@@ -1841,10 +1774,10 @@
     <path
        inkscape:connector-curvature="0"
        style="fill:none;stroke:#000000;stroke-width:0.34969181;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1"
-       d="m 436.30005,556.2296 h 4.08853"
+       d="m 411.88055,556.2296 h 4.08853"
        id="path3898-6" />
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-134.44697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3902-5">
       <use
@@ -1856,7 +1789,7 @@
          id="use3900-6" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-134.44697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3906-2">
       <use
@@ -1868,7 +1801,7 @@
          id="use3904-8" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-134.44697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3910-6">
       <use
@@ -1880,33 +1813,7 @@
          id="use3908-9" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
-       style="fill:#000000;fill-opacity:1"
-       id="g3918-8">
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-8"
-         x="466.64999"
-         y="425.04099"
-         id="use3912-8" />
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-1"
-         x="472.24026"
-         y="425.04099"
-         id="use3914-7" />
-      <use
-         height="100%"
-         width="100%"
-         xlink:href="#glyph5-7"
-         x="475.89316"
-         y="425.04099"
-         id="use3916-8" />
-    </g>
-    <g
-       transform="matrix(1.2058339,0,0,1.2058339,-110.02747,45.502459)"
+       transform="matrix(1.2058339,0,0,1.2058339,-149.44697,45.502459)"
        style="fill:#000000;fill-opacity:1"
        id="g3922-4">
       <use
@@ -1918,7 +1825,7 @@
          id="use3920-2" />
     </g>
     <g
-       transform="matrix(1.2058339,0,0,1.2058339,-82.726806,45.505042)"
+       transform="matrix(1.2058339,0,0,1.2058339,-79.06579,45.505042)"
        style="fill:#000000;fill-opacity:1"
        id="g3800-0-4">
       <use
@@ -1932,12 +1839,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.08761239px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.07719032"
-       x="316.69778"
+       x="320.3588"
        y="563.76636"
        id="text1173"><tspan
          sodipodi:role="line"
          id="tspan1171"
-         x="316.69778"
+         x="320.3588"
          y="563.76636"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmr10;-inkscape-font-specification:cmr10;baseline-shift:baseline;stroke-width:0.07719032">true</tspan></text>
   </g>
