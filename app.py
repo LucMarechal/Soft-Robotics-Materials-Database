@@ -55,6 +55,7 @@ external_stylesheets = ['SoRo_Material_Database.css', dbc.themes.GRID,] #dbc.the
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
+server = app.server
 app.title = "Soft Robotics Materials Database"
 
 
