@@ -155,7 +155,7 @@ materials = list_files(github_url)
 nb_materials_in_db = len(materials)
 
 # Constitutive models
-models = np.array(['Neo Hookean', 'Mooney Rivlin', 'Ogden', 'Veronda Westmann', 'Yeoh', 'Humphrey'])
+models = np.array(['Mooney Rivlin', 'Ogden', 'Neo Hookean', 'Veronda Westmann', 'Yeoh', 'Humphrey'])
 
 
 nav = html.Nav(className = "nav nav-pills", children=[
@@ -215,7 +215,7 @@ app_constitutive_models_layout = html.Div(children=[
         dcc.Dropdown(
             id='dropdown-material',
             options=[{'label': i, 'value': i} for i in materials],   # dynamically fill in the dropdown menu
-            value='RTV615',
+            value='Dragon Skin 20',
             style={'width': '100%', 'marginBottom': '1em'}
         ),
 
@@ -301,8 +301,6 @@ app_constitutive_models_layout = html.Div(children=[
         ]),
 
         html.Button('Fit Data', id='button-fit-data', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
-
-        html.Div([dbc.Spinner(id='waiting-spinner', color='danger')]),
  
         html.Div(id='header-table-param',children=''' '''),
 
