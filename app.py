@@ -8,12 +8,19 @@ __maintainer__ = "Luc Marechal"
 __email__ = "luc.marechal(at)univ-smb(dot)fr"
 __status__ = "Prod1"
 
-
-# Resources and documentation
+######### RESOURCES AND DOCUMENTATION ###############
 # Beautifulsoup : https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3
 # Greek symbol display : https://community.plotly.com/t/greek-symbols-with-latex-or-unicode/5531/9
 # Determining which Input has fired : https://dash.plotly.com/advanced-callbacks
 # Change range slider color : https://community.plotly.com/t/slide-box-color-of-plotly-rangeslider/34849
+#####################################################
+
+########## RUNNING THE APP LOCALY ###################
+# To run the app localy
+# Comment out line 65 of this file : server = app.server
+# In a cmd Terminal run : python app_local_test.py
+# Then open web browser : http://127.0.0.1:8050/
+#####################################################
 
 # Dash
 import dash
@@ -57,7 +64,6 @@ external_stylesheets = ['SoRo_Material_Database.css', dbc.themes.GRID,] #dbc.the
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
 server = app.server
 app.title = "Soft Robotics Materials Database"
-
 
 
 #mathjax = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML'
@@ -111,39 +117,7 @@ def optimization(model, order, dataframe, data_type):
     
     if hyperelastic.fitting_method == 'trust-constr':   
         if hyperelastic.model == 'Ogden':
-            const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian)  
-#            def NonlinearConstraintFunction(parameters):
-#                """ Constraints function for 'trust-constr' optimisation algorithm"""
-#                # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]   
-#                # Non Linear Conditions for the Ogden model : mu1*alpha1 > 0, mu2*alpha2 > 0, mu3*alpha3 > 0
-#                if hyperelastic.order == 3:
-#                    constraints_function = [parameters[0]*parameters[3], parameters[1]*parameters[4], parameters[2]*parameters[5]]
-#                elif hyperelastic.order == 2:
-#                    constraints_function = [parameters[0]*parameters[2], parameters[1]*parameters[3]]
-#                elif hyperelastic.order == 1:
-#                    constraints_function = [parameters[0]*parameters[1]]
-#                else:
-#                    constraints_function = []
-#                    print("Error in OGDEN NonlinearConstraintFunction")
-#
-#                return constraints_function
-#
-#            def NonlinearConstraintJacobian(parameters):
-#                """ Constraints function for 'trust-constr' optimisation algorithm"""
-#                # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]   
-#                # Non Linear Conditions for the Ogden model : mu1*alpha1 > 0, mu2*alpha2 > 0, mu3*alpha3 > 0
-#                if hyperelastic.order == 3:
-#                    constraints_jacobian = [[parameters[3], 0, 0, parameters[0], 0, 0], [0, parameters[4], 0, 0, parameters[1], 0], [0, 0, parameters[5], 0, 0, parameters[2]]]
-#                elif hyperelastic.order == 2:
-#                    constraints_jacobian = [[parameters[2], 0, parameters[0], 0], [0, parameters[3], 0, parameters[1]]]
-#                elif hyperelastic.order == 1:
-#                    constraints_jacobian = [parameters[1], parameters[0]]
-#                else:
-#                    constraints_jacobian = []
-#                    print("Error in OGDEN NonlinearConstraintJacobian")
-#
-#                return constraints_jacobian
-#            const = ()#NonlinearConstraint(NonlinearConstraintFunction, 0.0, np.inf, jac=NonlinearConstraintJacobian)#, hess='2-point')
+            const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian)
         elif hyperelastic.model == 'Mooney Rivlin':
             # Linear Conditions for the Mooney Rivlin model : C10 + C01 > 0
             const = LinearConstraint([[1.0, 1.0, 0.0][0:hyperelastic.order], [0.0, 0.0, 0.0][0:hyperelastic.order]], 0.0, np.inf)
@@ -151,13 +125,11 @@ def optimization(model, order, dataframe, data_type):
             const=()
 
         # The ogden and Mooney Rivlin models need constraint optimisation which cannot be done with the Levenberg-Marquandt algorithm
-        optim_result = minimize(objectiveFun_Callback, hyperelastic.initialGuessParam, args=(exp_strain, exp_stress, hyperelastic), method='trust-constr', constraints=const, tol=1e-12)
-    
+        optim_result = minimize(objectiveFun_Callback, hyperelastic.initialGuessParam, args=(exp_strain, exp_stress, hyperelastic), method='trust-constr', constraints=const, tol=1e-12)   
     elif hyperelastic.fitting_method == 'lm':
         # The least_squares package calls the Levenberg-Marquandt algorithm.
         # best-fit paramters are kept within optim_result.x
         optim_result = least_squares(objectiveFun_Callback, hyperelastic.initialGuessParam, method ='lm', gtol=1e-12, args=(exp_strain, exp_stress, hyperelastic))   
-
     else:
         print("Error in fitting method")
 
@@ -183,7 +155,7 @@ materials = list_files(github_url)
 nb_materials_in_db = len(materials)
 
 # Constitutive models
-models = np.array(['Ogden', 'Mooney Rivlin', 'Veronda Westmann', 'Yeoh', 'Neo Hookean', 'Humphrey'])
+models = np.array(['Neo Hookean', 'Mooney Rivlin', 'Ogden', 'Veronda Westmann', 'Yeoh', 'Humphrey'])
 
 
 nav = html.Nav(className = "nav nav-pills", children=[
