@@ -110,7 +110,7 @@ def optimization(model, order, dataframe, data_type):
     exp_stress = dataframe[data_type+' Stress (MPa)'].values
     
     if hyperelastic.fitting_method == 'trust-constr':   
-        if hyperelastic.model == 'OgdenDEBUG':
+        if hyperelastic.model == 'Ogden':
             
             def NonlinearConstraintFunction(parameters):
                 """ Constraints function for 'trust-constr' optimisation algorithm"""
