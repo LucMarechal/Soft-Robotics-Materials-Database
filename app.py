@@ -330,6 +330,8 @@ app_constitutive_models_layout = html.Div(children=[
 
         html.Button('Fit Data', id='button-fit-data', style={'marginBottom': '1em', 'background-color': sorored, 'color': 'white'}),
 
+        html.Div([dbc.Spinner(id='waiting-spinner', color='danger')]),
+ 
         html.Div(id='header-table-param',children=''' '''),
 
         dash_table.DataTable(
