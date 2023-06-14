@@ -144,7 +144,7 @@ def optimization(model, order, dataframe, data_type):
 
                 return constraints_jacobian
 
-            const = NonlinearConstraint(NonlinearConstraintFunction, 0.0, np.inf, jac=NonlinearConstraintJacobian)#, hess='2-point')
+            const = ()#NonlinearConstraint(NonlinearConstraintFunction, 0.0, np.inf, jac=NonlinearConstraintJacobian)#, hess='2-point')
         elif hyperelastic.model == 'Mooney Rivlin':
             # Linear Conditions for the Mooney Rivlin model : C10 + C01 > 0
             const = LinearConstraint([[1.0, 1.0, 0.0][0:hyperelastic.order], [0.0, 0.0, 0.0][0:hyperelastic.order]], 0.0, np.inf)
