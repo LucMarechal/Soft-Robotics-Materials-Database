@@ -121,7 +121,7 @@ def NonlinearConstraintFunction(parameters):
     return constraints_function
 
 
- def NonlinearConstraintJacobian(parameters):
+def NonlinearConstraintJacobian(parameters):
     """ Constraints function for 'trust-constr' optimisation algorithm"""      
     # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]
         
