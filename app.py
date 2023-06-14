@@ -112,8 +112,8 @@ def optimization(model, order, dataframe, data_type):
     if hyperelastic.fitting_method == 'trust-constr':   
         if hyperelastic.model == 'Ogden':
             
-	    def NonlinearConstraintFunction(parameters):
-	        """ Constraints function for 'trust-constr' optimisation algorithm"""
+            def NonlinearConstraintFunction(parameters):
+                """ Constraints function for 'trust-constr' optimisation algorithm"""
                 # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]   
                 # Non Linear Conditions for the Ogden model : mu1*alpha1 > 0, mu2*alpha2 > 0, mu3*alpha3 > 0
                 if hyperelastic.order == 3:
@@ -125,11 +125,11 @@ def optimization(model, order, dataframe, data_type):
                 else:
                     constraints_function = []
                     print("Error in OGDEN NonlinearConstraintFunction")
-                
+
                 return constraints_function
 
-	    def NonlinearConstraintJacobian(parameters):
-	        """ Constraints function for 'trust-constr' optimisation algorithm"""
+            def NonlinearConstraintJacobian(parameters):
+                """ Constraints function for 'trust-constr' optimisation algorithm"""
                 # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]   
                 # Non Linear Conditions for the Ogden model : mu1*alpha1 > 0, mu2*alpha2 > 0, mu3*alpha3 > 0
                 if hyperelastic.order == 3:
@@ -141,7 +141,7 @@ def optimization(model, order, dataframe, data_type):
                 else:
                     constraints_jacobian = []
                     print("Error in OGDEN NonlinearConstraintJacobian")
-                
+
                 return constraints_jacobian
 
             const = NonlinearConstraint(NonlinearConstraintFunction, 0.0, np.inf, jac=NonlinearConstraintJacobian)#, hess='2-point')
