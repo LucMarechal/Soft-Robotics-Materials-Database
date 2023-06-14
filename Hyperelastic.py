@@ -10,13 +10,13 @@ import numpy as np
 class Hyperelastic:
 
     def __init__(self, model, parameters, order, data_type):
-        self.model = model
-        self.order = order
+        self.model = model                # model = "Ogden" or "Mooney Rivlin" or ...
+        self.order = order                # order = 1 or 2 or 3
         self.parameters = parameters
         self.param_names = []
-        self.data_type = data_type        
-        self.fitting_method = 'lm'
-
+        self.data_type = data_type        # data_type = 'True' or 'Engineering'
+        self.fitting_method = 'lm'        # fitting_method = 'lm' or 'trust-constr'
+        
         if model == 'Ogden':
             initialGuessMu = np.array([1.0]*self.order)
             initialGuessAlpha = np.array([1.0]*self.order)
@@ -281,11 +281,11 @@ class Hyperelastic:
         
         if self.model == 'Ogden':
             if self.order == 3:
-                constraints_jacobian = [[parameters[3], 0, 0, parameters[0], 0, 0], [0, parameters[4], 0, 0, parameters[1], 0], [0, 0, parameters[5], 0, 0, parameters[2]]]
+                constraints_jacobian = [[self.parameters[3], 0, 0, self.parameters[0], 0, 0], [0, self.parameters[4], 0, 0, self.parameters[1], 0], [0, 0, self.parameters[5], 0, 0, self.parameters[2]]]
             elif self.order == 2:
-                constraints_jacobian = [[parameters[2], 0, parameters[0], 0], [0, parameters[3], 0, parameters[1]]]
+                constraints_jacobian = [[self.parameters[2], 0, self.parameters[0], 0], [0, self.parameters[3], 0, self.parameters[1]]]
             elif self.order == 1:
-                constraints_jacobian = [parameters[1], parameters[0]]
+                constraints_jacobian = [self.parameters[1], self.parameters[0]]
             else:
                 print("Error in OGDEN Hyperelastic.ConstraintsFunction")
         else:
