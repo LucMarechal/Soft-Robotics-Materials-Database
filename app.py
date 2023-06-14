@@ -101,6 +101,46 @@ def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):
     return residuals
 
 
+def NonlinearConstraintFunction(parameters):
+    """ Constraints function for 'trust-constr' optimisation algorithm"""      
+    # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]   
+    
+    if self.model == 'Ogden':
+        if self.order == 3:
+            constraints_function = [self.parameters[0]*self.parameters[3], self.parameters[1]*self.parameters[4], self.parameters[2]*self.parameters[5]]
+        elif self.order == 2:
+            constraints_function = [self.parameters[0]*self.parameters[2], self.parameters[1]*self.parameters[3]]
+        elif self.order == 1:
+            constraints_function = [self.parameters[0]*self.parameters[1]]
+        else:
+            print("Error in OGDEN Hyperelastic.ConstraintsFunction")
+    else:
+        constraints_function = []
+        print("Error in ConstraintsFunction")
+         
+    return constraints_function
+
+
+ def NonlinearConstraintJacobian(parameters):
+    """ Constraints function for 'trust-constr' optimisation algorithm"""      
+    # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]
+        
+    if self.model == 'Ogden':
+        if self.order == 3:
+            constraints_jacobian = [[parameters[3], 0, 0, parameters[0], 0, 0], [0, parameters[4], 0, 0, parameters[1], 0], [0, 0, parameters[5], 0, 0, parameters[2]]]
+        elif self.order == 2:
+            constraints_jacobian = [[parameters[2], 0, parameters[0], 0], [0, parameters[3], 0, parameters[1]]]
+        elif self.order == 1:
+            constraints_jacobian = [parameters[1], parameters[0]]
+        else:
+            print("Error in OGDEN Hyperelastic.ConstraintsFunction")
+    else:
+        constraints_jacobian = []
+        print("Error in ConstraintsFunction")
+         
+    return constraints_jacobian
+
+
 def optimization(model, order, dataframe, data_type):
     # Hyperelastic object
     hyperelastic = Hyperelastic(model, np.array([0]), order, data_type)
@@ -112,7 +152,7 @@ def optimization(model, order, dataframe, data_type):
 
     if hyperelastic.fitting_method == 'trust-constr':   
         if hyperelastic.model == 'Ogden':
-            # Non Linear Conditions for the Ogden model : mu0*alpha0 > 0, mu1*alpha1 > 0, mu2*alpha2 > 0
+            # Non Linear Conditions for the Ogden model : mu1*alpha1 > 0, mu2*alpha2 > 0, mu3*alpha3 > 0
             const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian)#, hess='2-point')
         elif hyperelastic.model == 'Mooney Rivlin':
             # Linear Conditions for the Mooney Rivlin model : C10 + C01 > 0
