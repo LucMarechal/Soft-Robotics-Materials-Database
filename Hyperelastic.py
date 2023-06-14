@@ -130,6 +130,8 @@ class Hyperelastic:
             Stress = np.sum(muVec*(lambd**alphaVec - 1/(lambd**(alphaVec/2))), axis=0)
         elif self.data_type == 'Engineering':
             Stress = np.sum((muVec*(lambd**alphaVec - 1/(lambd**(alphaVec/2)))/lambd), axis=0)
+        else:
+            print("Data type error. Data is neither 'True' or 'Engineering'. ") 
 
         return Stress
 
