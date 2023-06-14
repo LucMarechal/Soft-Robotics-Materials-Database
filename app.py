@@ -111,7 +111,7 @@ def optimization(model, order, dataframe, data_type):
     
     if hyperelastic.fitting_method == 'trust-constr':   
         if hyperelastic.model == 'Ogden':
-            const = ()  #DEBUG          
+            const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian)  
 #            def NonlinearConstraintFunction(parameters):
 #                """ Constraints function for 'trust-constr' optimisation algorithm"""
 #                # parameter is a 1D array : [mu0,mu1,...,mun,alpha0,alpha1,...,alphan]   
