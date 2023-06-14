@@ -25,7 +25,7 @@ class Hyperelastic:
             muVec_names = ["µ1","µ2","µ3"][0:self.order]
             alphaVec_names = ["α1","α2","α3"][0:self.order]
             self.param_names = np.append(muVec_names,alphaVec_names)
-            self.fitting_method = 'lm' #DEBUG 'trust-constr'
+            self.fitting_method = 'trust-constr'
         elif model == 'Neo Hookean':
             self.initialGuessParam = np.array([0.1])
             self.nbparam = 1            
