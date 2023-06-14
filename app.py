@@ -6,7 +6,7 @@ __license__ = "GPL"
 __version__ = "2.0.0"
 __maintainer__ = "Luc Marechal"
 __email__ = "luc.marechal(at)univ-smb(dot)fr"
-__status__ = "Prod1"
+__status__ = "Prod2"
 
 ######### RESOURCES AND DOCUMENTATION ###############
 # Beautifulsoup : https://www.digitalocean.com/community/tutorials/how-to-work-with-web-data-using-requests-and-beautiful-soup-with-python-3
