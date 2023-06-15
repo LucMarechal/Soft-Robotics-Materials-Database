@@ -17,7 +17,6 @@ __status__ = "Prod2"
 
 ########## RUNNING THE APP LOCALY ###################
 # To run the app localy
-# Comment out line 65 of this file : server = app.server
 # In a cmd Terminal run : python app_local_test.py
 # Then open web browser : http://127.0.0.1:8050/
 #####################################################
@@ -117,7 +116,7 @@ def optimization(model, order, dataframe, data_type):
     
     if hyperelastic.fitting_method == 'trust-constr':   
         if hyperelastic.model == 'Ogden':
-            const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian)
+            const = NonlinearConstraint(hyperelastic.NonlinearConstraintFunction, 0.0, np.inf, jac=hyperelastic.NonlinearConstraintJacobian, hess='2-point')
         elif hyperelastic.model == 'Mooney Rivlin':
             # Linear Conditions for the Mooney Rivlin model : C10 + C01 > 0
             const = LinearConstraint([[1.0, 1.0, 0.0][0:hyperelastic.order], [0.0, 0.0, 0.0][0:hyperelastic.order]], 0.0, np.inf)
