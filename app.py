@@ -96,7 +96,7 @@ def read_csv_exp_data_files(material_name):
 # cost function to calculate the residuals. The fitting function holds the parameter values.  
 def objectiveFun_Callback(parameters, exp_strain, exp_stress, hyperelastic):
     theo_stress = hyperelastic.ConsitutiveModel(parameters, exp_strain)   
-
+    # The cost function for Levenberg-Marquardt and Trust Constraint algorithms are not expressed the same way ! Check Scipy documentation 
     if hyperelastic.fitting_method == 'lm':
         residuals = theo_stress - exp_stress
     elif hyperelastic.fitting_method == 'trust-constr':
