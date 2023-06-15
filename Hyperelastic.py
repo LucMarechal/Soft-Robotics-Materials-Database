@@ -60,7 +60,7 @@ class Hyperelastic:
             self.param_names = ["C1","C2"]
             self.fitting_method = 'lm'
         else:
-            print("Error")
+            print("Error. Wrong name of model in Hyperelastic")
 
 
 
