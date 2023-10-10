@@ -73,6 +73,6 @@ typed-ast==1.4.0
 urllib3==1.25.8
 virtualenv==20.0.18
 virtualenv-clone==0.5.4
-Werkzeug==1.0.1
+Werkzeug==2.2.3
 wrapt==1.11.2
 zipp==3.1.0
