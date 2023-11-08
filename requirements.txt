@@ -39,7 +39,7 @@ mccabe==0.6.1
 numpy==1.17.3
 numpy-stl==2.10.1
 pandas==1.0.3
-pipenv==2018.11.26
+pipenv==2022.1.8
 plotly==4.5.4
 public==2019.4.13
 pycparser==2.20
