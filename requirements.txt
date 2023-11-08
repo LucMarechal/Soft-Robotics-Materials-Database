@@ -3,7 +3,7 @@ asgiref==3.2.7
 astroid==2.3.0
 beautifulsoup4==4.8.1
 cached-property==1.5.1
-certifi==2019.11.28
+certifi==2022.12.7
 cffi==1.14.0
 chardet==3.0.4
 click==7.1.1
